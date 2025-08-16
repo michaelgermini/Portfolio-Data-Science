@@ -321,6 +321,7 @@ page = st.sidebar.radio(
         "Data for Good: AQI Forecast",
         "Data for Good: Local Climate 2050",
         "Storytelling notes",
+        "Swiss Geo (STAC)",
     ],
     index=0,
 )
@@ -503,7 +504,7 @@ elif page == "Data for Good: Local Climate 2050":
         )
         st.markdown("Data: `data_for_good/local_climate_projection/data/local_temp.csv` with columns `date, tmean`.")
     render_dfg_climate()
-else:
+elif page == "Storytelling notes":
     def render_story_notes() -> None:
         st.header("Data storytelling notes")
         st.caption("Reusable ideas to enrich narrative and UX across dashboards.")
@@ -513,6 +514,119 @@ else:
         st.markdown("- Color‑blind friendly palettes and mobile layout")
         st.markdown("See: `data_storytelling/README.md`.")
     render_story_notes()
+
+elif page == "Swiss Geo (STAC)":
+    def render_stac() -> None:
+        st.header("Swiss Geo (STAC)")
+        st.caption("Browse Swiss federal geodata via STAC API and preview/download assets. Docs: data.geo.admin STAC landing page.")
+
+        root = "https://data.geo.admin.ch/api/stac/v1"
+
+        with st.expander("Step 1 – List collections"):
+            provider_filter = st.text_input("Provider contains (optional)", value="")
+            limit = st.number_input("Limit", min_value=1, max_value=100, value=50, step=1)
+            if st.button("Fetch collections"):
+                try:
+                    resp = requests.get(f"{root}/collections", params={"limit": limit}, timeout=30)
+                    resp.raise_for_status()
+                    cols = resp.json().get("collections", [])
+                    if provider_filter:
+                        provider_filter_l = provider_filter.lower()
+                        def has_provider(c):
+                            provs = c.get("providers", []) or []
+                            texts = [p.get("name", "") for p in provs]
+                            return any(provider_filter_l in (t or "").lower() for t in texts)
+                        cols = [c for c in cols if has_provider(c)]
+                    st.session_state["stac_collections"] = cols
+                    st.success(f"Loaded {len(cols)} collections")
+                except Exception as e:
+                    st.error(f"Failed to load collections: {e}")
+
+            cols = st.session_state.get("stac_collections", [])
+            if cols:
+                dfc = pd.DataFrame([{"id": c.get("id"), "title": c.get("title"), "license": c.get("license")} for c in cols])
+                st.dataframe(dfc, use_container_width=True)
+
+        with st.expander("Step 2 – Pick a collection & search items"):
+            cols = st.session_state.get("stac_collections", [])
+            col_ids = [c.get("id") for c in cols] if cols else []
+            collection_id = st.selectbox("Collection id", col_ids, index=0 if col_ids else None)
+            c1, c2 = st.columns(2)
+            with c1:
+                bbox_str = st.text_input("BBox (lonmin,latmin,lonmax,latmax)", value="5.96,45.82,10.49,47.81")
+            with c2:
+                datetime_q = st.text_input("Datetime (RFC3339 interval)", value="../..")
+            limit_items = st.number_input("Items limit", min_value=1, max_value=100, value=10)
+            if st.button("Search items") and collection_id:
+                try:
+                    params = {"limit": int(limit_items)}
+                    # Prefer POST /search for bbox/datetime if provided, else GET items
+                    use_post = True
+                    payload = {"collections": [collection_id], "limit": int(limit_items)}
+                    if bbox_str:
+                        try:
+                            bbox_vals = [float(x.strip()) for x in bbox_str.split(",")]
+                            if len(bbox_vals) == 4:
+                                payload["bbox"] = bbox_vals
+                        except Exception:
+                            pass
+                    if datetime_q and datetime_q != "../..":
+                        payload["datetime"] = datetime_q
+                    r = requests.post(f"{root}/search", json=payload, timeout=60) if use_post else requests.get(f"{root}/collections/{collection_id}/items", params=params, timeout=60)
+                    r.raise_for_status()
+                    items = r.json().get("features", [])
+                    st.session_state["stac_items"] = items
+                    st.success(f"Loaded {len(items)} items")
+                except Exception as e:
+                    st.error(f"Search failed: {e}")
+
+            items = st.session_state.get("stac_items", [])
+            if items:
+                ids = [it.get("id") for it in items]
+                item_idx = st.selectbox("Item", list(range(len(items))), format_func=lambda i: ids[i] if ids and i < len(ids) else str(i))
+                sel = items[item_idx]
+                st.json({k: sel[k] for k in ["id","bbox","properties"] if k in sel})
+
+                st.subheader("Assets")
+                assets = sel.get("assets", {}) or {}
+                if not assets:
+                    st.info("No assets on this item.")
+                else:
+                    for aid, a in assets.items():
+                        href = a.get("href")
+                        atype = a.get("type")
+                        st.markdown(f"- `{aid}` — {atype or ''}")
+                        if href:
+                            c1, c2 = st.columns([1,1])
+                            with c1:
+                                st.write(href)
+                            with c2:
+                                if st.button(f"Download {aid}"):
+                                    try:
+                                        resp = requests.get(href, timeout=60)
+                                        resp.raise_for_status()
+                                        out_dir = Path("data_sources/geo_admin"); out_dir.mkdir(parents=True, exist_ok=True)
+                                        suffix = Path(href).name
+                                        out_path = out_dir / suffix
+                                        out_path.write_bytes(resp.content)
+                                        st.success(f"Saved: {out_path}")
+                                    except Exception as e:
+                                        st.error(f"Download failed: {e}")
+
+                        # Quick preview for JSON/GeoJSON
+                        if href and ((atype and "json" in atype.lower()) or href.lower().endswith((".json",".geojson"))):
+                            try:
+                                preview = requests.get(href, timeout=60).json()
+                                # show first features if FeatureCollection
+                                if isinstance(preview, dict) and preview.get("type") == "FeatureCollection":
+                                    feats = preview.get("features", [])[:3]
+                                    st.json({"type": "FeatureCollection", "features": feats})
+                                else:
+                                    st.json(preview if isinstance(preview, dict) else {"preview": str(preview)[:1000]})
+                            except Exception:
+                                pass
+
+    render_stac()
 
  
 
