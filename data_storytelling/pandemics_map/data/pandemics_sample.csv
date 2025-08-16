@@ -1,0 +1,14 @@
+year,country,disease,cases,deaths
+1348,Italy,Black Death,2000000,1000000
+1348,France,Black Death,1500000,750000
+1349,England,Black Death,1200000,600000
+1918,United States,Influenza (H1N1),25000000,675000
+1918,France,Influenza (H1N1),8000000,240000
+1918,India,Influenza (H1N1),30000000,12000000
+2014,Guinea,Ebola,3800,2530
+2014,Liberia,Ebola,10678,4809
+2014,Sierra Leone,Ebola,14124,3956
+2020,Italy,COVID-19,250000,35000
+2020,United Kingdom,COVID-19,300000,45000
+2020,United States,COVID-19,1500000,90000
+
