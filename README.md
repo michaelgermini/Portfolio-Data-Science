@@ -1,6 +1,6 @@
-## Data Science Portfolio
+## Data Science Portfolio – Unified Streamlit App
 
-Structured project to showcase a complete skill set: exploration, visualization, classic ML, deep learning, storytelling, and data for good.
+A cohesive portfolio that demonstrates end‑to‑end data work: data cleaning, multi‑source integration, interactive visualization, machine learning, and data storytelling. The unified Streamlit app offers a clean navigation to explore inequalities across countries and climate‑energy trends, plus links to hands‑on ML and “Data for Good” notebooks.
 
 ### What’s inside (Unified App)
 - Inequalities (Country comparator)
@@ -14,6 +14,11 @@ Structured project to showcase a complete skill set: exploration, visualization,
   - 3D timeline (decade scrub) for CO₂ vs energy metrics
   - Time series per metric
   - Country filter by name or ISO code
+
+Why it’s useful
+- Compare countries quickly across key indicators for health, education, water access, and prosperity
+- Explore climate and energy trajectories with an intuitive 3D animation
+- Extend with your own data by dropping tidy CSVs (long format)
 
 Data format hints
 - Long/tidy format for inequalities: `country, year, indicator, value`
@@ -47,6 +52,10 @@ streamlit run "unified_app/streamlit_app.py"
 ### Data
 Apps can automatically download public datasets (OWID/WorldBank) if internet is available. Otherwise, you can import your own CSV via the interface.
 
+Primary sources
+- Our World in Data (OWID): CO₂ data and related energy metrics
+- World Bank / UN / IMF: socio‑economic indicators for inequalities
+
 ### Notes
 - Some heavy libraries (deep learning) are not in the base `requirements.txt` to keep installation light. See notebook sections for optional installs.
 
@@ -61,6 +70,11 @@ Apps can automatically download public datasets (OWID/WorldBank) if internet is 
   - Latest values: last available value per country in period
   - Ranking: top 25 countries by chosen indicator for a selected year
 
+Architecture overview
+- Streamlit + Plotly for the app UI and interactive charts
+- Pandas for data wrangling (long format: `country, year, indicator, value`)
+- Scikit‑learn in notebooks (house prices, spam classification)
+
 Sample dataset
 - `exploration_inegalites/data/inegalites_sample.csv`
   - Countries: France, Germany, United States, India, Nigeria, Brazil, China, South Africa
@@ -72,6 +86,12 @@ Sample dataset
 - App file: `unified_app/streamlit_app.py`
 - Python version: 3.11
 - Requirements file: `requirements.txt`
+
+Optional improvements (roadmap)
+- Add map view for inequalities (choropleth)
+- Per‑capita toggle for climate variables
+- Caching for large CSV uploads
+- Simple unit tests for data loading and transformations
 
 ### Contact
 - GitHub: `michaelgermini`  
