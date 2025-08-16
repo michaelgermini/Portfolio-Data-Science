@@ -260,12 +260,99 @@ def render_climat() -> None:
 
 
 st.sidebar.title("Navigation")
-page = st.sidebar.radio("Section", ["Inequalities", "Climate & Energy"], index=0)
+page = st.sidebar.radio(
+    "Section",
+    [
+        "Inequalities",
+        "Climate & Energy",
+        "ML: House Prices",
+        "ML: Spam Classification",
+        "Data for Good: AQI Forecast",
+        "Data for Good: Local Climate 2050",
+        "Storytelling notes",
+    ],
+    index=0,
+)
 
 if page == "Inequalities":
     render_inegalites()
-else:
+elif page == "Climate & Energy":
     render_climat()
+elif page == "ML: House Prices":
+    def render_ml_house_prices() -> None:
+        st.header("ML – House Prices (regression)")
+        st.caption("Kaggle House Prices – ridge/lasso/GBR with preprocessing and cross‑validation.")
+        st.markdown("Notebook path: `ml_immo/notebooks/house_prices_modeling.ipynb`")
+        st.markdown("Run locally:")
+        st.code(
+            """
+            # in project root
+            .venv\\Scripts\\activate  # if you use the venv
+            jupyter lab ml_immo/notebooks/house_prices_modeling.ipynb
+            """,
+            language="bash",
+        )
+        st.markdown("Data: place Kaggle `train.csv` and `test.csv` under `ml_immo/data/house_prices/`.")
+        st.markdown("Metrics: RMSE, R² via 5‑fold CV.")
+    render_ml_house_prices()
+elif page == "ML: Spam Classification":
+    def render_ml_spam() -> None:
+        st.header("ML – Spam vs Ham (text classification)")
+        st.caption("TF‑IDF + Logistic Regression / Naive Bayes; reports Precision/Recall/F1.")
+        st.markdown("Notebook path: `spam_classification/notebooks/spam_classification.ipynb`")
+        st.markdown("Run locally:")
+        st.code(
+            """
+            # in project root
+            .venv\\Scripts\\activate  # if you use the venv
+            jupyter lab spam_classification/notebooks/spam_classification.ipynb
+            """,
+            language="bash",
+        )
+        st.markdown("Data: put `spam.csv` under `spam_classification/data/` with columns `text`, `label`.")
+    render_ml_spam()
+elif page == "Data for Good: AQI Forecast":
+    def render_dfg_aqi() -> None:
+        st.header("Data for Good – AQI Forecast")
+        st.caption("Next‑day city AQI using time‑series baselines; optional LSTM.")
+        st.markdown("Notebook path: `data_for_good/air_quality_forecast/notebooks/aqi_forecast.ipynb`")
+        st.markdown("Run locally:")
+        st.code(
+            """
+            # in project root
+            .venv\\Scripts\\activate  # if you use the venv
+            jupyter lab data_for_good/air_quality_forecast/notebooks/aqi_forecast.ipynb
+            """,
+            language="bash",
+        )
+        st.markdown("Data: `data_for_good/air_quality_forecast/data/aqi_city.csv` with columns `date, aqi, temp, wind, ...`.")
+    render_dfg_aqi()
+elif page == "Data for Good: Local Climate 2050":
+    def render_dfg_climate() -> None:
+        st.header("Data for Good – Local climate projection (2050)")
+        st.caption("Bias correction from local series + scenario exploration (RCP/SSP).")
+        st.markdown("Notebook path: `data_for_good/local_climate_projection/notebooks/local_climate_projection.ipynb`")
+        st.markdown("Run locally:")
+        st.code(
+            """
+            # in project root
+            .venv\\Scripts\\activate  # if you use the venv
+            jupyter lab data_for_good/local_climate_projection/notebooks/local_climate_projection.ipynb
+            """,
+            language="bash",
+        )
+        st.markdown("Data: `data_for_good/local_climate_projection/data/local_temp.csv` with columns `date, tmean`.")
+    render_dfg_climate()
+else:
+    def render_story_notes() -> None:
+        st.header("Data storytelling notes")
+        st.caption("Reusable ideas to enrich narrative and UX across dashboards.")
+        st.markdown("- Annotations and callouts for key events")
+        st.markdown("- Glossary with short definitions")
+        st.markdown("- Source links and caveats near each chart")
+        st.markdown("- Color‑blind friendly palettes and mobile layout")
+        st.markdown("See: `data_storytelling/README.md`.")
+    render_story_notes()
 
 
 # Sidebar footer with portfolio titles and contact
