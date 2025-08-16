@@ -7,13 +7,13 @@ from pathlib import Path
 # ML/Preprocessing imports for House Prices page
 import numpy as np
 from sklearn.model_selection import KFold, cross_val_predict, train_test_split
-from sklearn.metrics import mean_squared_error, r2_score, precision_recall_fscore_support, accuracy_score, confusion_matrix
+from sklearn.metrics import mean_squared_error, r2_score, precision_recall_fscore_support, accuracy_score, confusion_matrix, mean_absolute_error
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import Ridge, Lasso
-from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.ensemble import GradientBoostingRegressor, RandomForestRegressor
 from sklearn.linear_model import LogisticRegression
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -618,32 +618,152 @@ elif page == "Data for Good: AQI Forecast":
         st.header("Data for Good – AQI Forecast")
         st.caption("Next‑day city AQI using time‑series baselines; optional LSTM.")
         st.markdown("Notebook path: `data_for_good/air_quality_forecast/notebooks/aqi_forecast.ipynb`")
-        st.markdown("Run locally:")
-        st.code(
-            """
-            # in project root
-            .venv\\Scripts\\activate  # if you use the venv
-            jupyter lab data_for_good/air_quality_forecast/notebooks/aqi_forecast.ipynb
-            """,
-            language="bash",
-        )
-        st.markdown("Data: `data_for_good/air_quality_forecast/data/aqi_city.csv` with columns `date, aqi, temp, wind, ...`.")
+
+        data_path = Path("data_for_good/air_quality_forecast/data/aqi_city.csv")
+        uploaded = st.file_uploader("Upload AQI CSV (date, aqi, temp, wind, humidity, ...)", type=["csv"], key="aqi_csv")
+
+        if uploaded is None:
+            if data_path.exists():
+                st.caption(f"Using sample: `{data_path.as_posix()}`")
+                df = pd.read_csv(data_path)
+                st.download_button("Download sample CSV", data=data_path.read_bytes(), file_name="aqi_city.csv", mime="text/csv")
+            else:
+                st.info("No data provided. Generate with: `python scripts/generate_aqi_sample.py`.")
+                return
+        else:
+            try:
+                df = pd.read_csv(uploaded)
+            except Exception as e:
+                st.error(f"Could not read CSV: {e}")
+                return
+
+        needed_cols = {"date", "aqi"}
+        if not needed_cols.issubset(set(c.lower() for c in df.columns)):
+            st.error("CSV must include at least `date` and `aqi`. Optional: `temp, wind, humidity, ...`.")
+            return
+        df.columns = [c.lower() for c in df.columns]
+        df = df.dropna(subset=["date", "aqi"]).copy()
+        df["date"] = pd.to_datetime(df["date"], errors="coerce")
+        df = df.dropna(subset=["date"]).sort_values("date")
+
+        # Features
+        df["aqi_lag1"] = df["aqi"].shift(1)
+        df["aqi_lag7"] = df["aqi"].shift(7)
+        df["dow"] = df["date"].dt.dayofweek
+        for col in ["temp", "wind", "humidity"]:
+            if col in df.columns:
+                df[f"{col}_lag1"] = df[col].shift(1)
+
+        df = df.dropna().reset_index(drop=True)
+        if df.empty:
+            st.warning("Not enough history after feature engineering.")
+            return
+
+        target = "aqi"
+        feature_cols = [c for c in df.columns if c not in ["date", target]]
+
+        # Train/validation split (last N as validation)
+        val_ratio = st.slider("Validation ratio", min_value=0.1, max_value=0.4, value=0.2, step=0.05)
+        n = len(df)
+        n_val = max(1, int(n * val_ratio))
+        train_df = df.iloc[:-n_val]
+        val_df = df.iloc[-n_val:]
+
+        baseline_pred = val_df["aqi_lag1"].values
+        rf = RandomForestRegressor(n_estimators=300, random_state=42)
+        rf.fit(train_df[feature_cols], train_df[target])
+        rf_pred = rf.predict(val_df[feature_cols])
+
+        # Metrics
+        b_rmse = float(np.sqrt(mean_squared_error(val_df[target], baseline_pred)))
+        b_mae = float(mean_absolute_error(val_df[target], baseline_pred))
+        m_rmse = float(np.sqrt(mean_squared_error(val_df[target], rf_pred)))
+        m_mae = float(mean_absolute_error(val_df[target], rf_pred))
+
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric("Baseline RMSE (lag-1)", f"{b_rmse:.1f}")
+        c2.metric("Baseline MAE (lag-1)", f"{b_mae:.1f}")
+        c3.metric("Model RMSE (RF)", f"{m_rmse:.1f}")
+        c4.metric("Model MAE (RF)", f"{m_mae:.1f}")
+
+        # Plot predictions
+        plot_df = val_df[["date", target]].copy()
+        plot_df["baseline"] = baseline_pred
+        plot_df["rf_pred"] = rf_pred
+        fig = px.line(plot_df, x="date", y=[target, "baseline", "rf_pred"], title="Next‑day AQI forecast – validation window")
+        st.plotly_chart(fig, use_container_width=True)
+
+        with st.expander("Notes"):
+            st.markdown("- Baseline uses yesterday's AQI as today's forecast (persistence).\n- Random Forest uses lags and optional weather inputs.\n- For LSTM, see the notebook.")
     render_dfg_aqi()
 elif page == "Data for Good: Local Climate 2050":
     def render_dfg_climate() -> None:
         st.header("Data for Good – Local climate projection (2050)")
         st.caption("Bias correction from local series + scenario exploration (RCP/SSP).")
         st.markdown("Notebook path: `data_for_good/local_climate_projection/notebooks/local_climate_projection.ipynb`")
-        st.markdown("Run locally:")
-        st.code(
-            """
-            # in project root
-            .venv\\Scripts\\activate  # if you use the venv
-            jupyter lab data_for_good/local_climate_projection/notebooks/local_climate_projection.ipynb
-            """,
-            language="bash",
-        )
-        st.markdown("Data: `data_for_good/local_climate_projection/data/local_temp.csv` with columns `date, tmean`.")
+
+        data_path = Path("data_for_good/local_climate_projection/data/local_temp.csv")
+        uploaded = st.file_uploader("Upload local temperature CSV (date, tmean)", type=["csv"], key="loc_temp_csv")
+
+        if uploaded is None:
+            if data_path.exists():
+                st.caption(f"Using sample: `{data_path.as_posix()}`")
+                df = pd.read_csv(data_path)
+                st.download_button("Download sample CSV", data=data_path.read_bytes(), file_name="local_temp.csv", mime="text/csv")
+            else:
+                st.info("No data provided. Generate with: `python scripts/generate_local_temp_sample.py`.")
+                return
+        else:
+            try:
+                df = pd.read_csv(uploaded)
+            except Exception as e:
+                st.error(f"Could not read CSV: {e}")
+                return
+
+        if not {"date", "tmean"}.issubset(set(c.lower() for c in df.columns)):
+            st.error("CSV must include `date` and `tmean`.")
+            return
+        df.columns = [c.lower() for c in df.columns]
+        df = df.dropna(subset=["date", "tmean"]).copy()
+        df["date"] = pd.to_datetime(df["date"], errors="coerce")
+        df = df.dropna(subset=["date"]).sort_values("date")
+
+        # Seasonal climatology
+        df["doy"] = df["date"].dt.dayofyear
+        clim = df.groupby("doy")["tmean"].mean()
+
+        # Scenario selection
+        scenario = st.selectbox("Scenario (2050 delta)", [
+            ("SSP1-2.6 (+1.0°C)", 1.0),
+            ("SSP2-4.5 (+1.5°C)", 1.5),
+            ("SSP3-7.0 (+2.5°C)", 2.5),
+            ("SSP5-8.5 (+3.0°C)", 3.0),
+        ], format_func=lambda x: x[0], index=1)
+        scen_label, scen_delta = scenario
+
+        # Project to 2050 with linear ramp from last observed date
+        last_date = df["date"].max()
+        end_proj = pd.Timestamp(year=2050, month=12, day=31)
+        proj_dates = pd.date_range(start=last_date + pd.Timedelta(days=1), end=end_proj, freq="D")
+        if len(proj_dates) == 0:
+            st.info("Projection window already past 2050.")
+            return
+        ramp = np.linspace(0.0, float(scen_delta), len(proj_dates))
+        proj_doy = proj_dates.dayofyear
+        proj_base = np.array([clim.get(d, clim.mean()) for d in proj_doy])
+        proj_tmean = proj_base + ramp
+
+        hist_df = df[["date", "tmean"]].copy()
+        proj_df = pd.DataFrame({"date": proj_dates, "tmean": proj_tmean})
+        plot_df = pd.concat([
+            hist_df.assign(series="historical"),
+            proj_df.assign(series=f"projection {scen_label}"),
+        ])
+        fig = px.line(plot_df, x="date", y="tmean", color="series", title="Local climate projection to 2050 (bias-corrected seasonal + scenario ramp)")
+        st.plotly_chart(fig, use_container_width=True)
+
+        csv_bytes = proj_df.to_csv(index=False).encode()
+        st.download_button("Download projected series (CSV)", data=csv_bytes, file_name="local_temp_projection_2050.csv", mime="text/csv")
     render_dfg_climate()
 elif page == "DL: Image Classification":
     def render_dl_image() -> None:
