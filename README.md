@@ -1,6 +1,10 @@
 ## Data Science Portfolio – Unified Streamlit App
 
-A cohesive portfolio that demonstrates end‑to‑end data work: data cleaning, multi‑source integration, interactive visualization, machine learning, and data storytelling. The unified Streamlit app offers a clean navigation to explore inequalities across countries and climate‑energy trends, plus links to hands‑on ML and “Data for Good” notebooks.
+This portfolio demonstrates end‑to‑end data skills: multi‑source ingestion, cleaning, interactive analytics, machine learning, and geospatial browsing. The unified Streamlit app provides a single entry point to:
+- Compare global inequalities (country‑level indicators)
+- Explore climate & energy trends with a 3D timeline
+- Run ML demos (house prices, spam)
+- Browse Swiss geodata via STAC and download assets
 
 ### What’s inside (Unified App)
 - Inequalities (Country comparator)
@@ -14,6 +18,13 @@ A cohesive portfolio that demonstrates end‑to‑end data work: data cleaning, 
   - 3D timeline (decade scrub) for CO₂ vs energy metrics
   - Time series per metric
   - Country filter by name or ISO code
+- ML: House Prices
+  - Upload Kaggle `train.csv`; optional log‑target
+  - 5‑fold CV metrics (RMSE, R²), Predicted vs Actual, Residuals, Top features
+- ML: Spam Classification
+  - TF‑IDF + Logistic Regression/Naive Bayes; Precision/Recall/F1
+- Swiss Geo (STAC)
+  - List collections, search items (bbox, datetime), preview assets, download to `data_sources/geo_admin/`
 
 Why it’s useful
 - Compare countries quickly across key indicators for health, education, water access, and prosperity
@@ -55,6 +66,7 @@ Apps can automatically download public datasets (OWID/WorldBank) if internet is 
 Primary sources
 - Our World in Data (OWID): CO₂ data and related energy metrics
 - World Bank / UN / IMF: socio‑economic indicators for inequalities
+- Swiss federal geodata (STAC): collections, items and assets (GeoJSON/GeoTIFF) via STAC API
 
 ### Notes
 - Some heavy libraries (deep learning) are not in the base `requirements.txt` to keep installation light. See notebook sections for optional installs.
@@ -65,6 +77,8 @@ Primary sources
   - Upload CSV and choose default indicator (inequalities)
   - Country selectors for left/right, period slider
   - Presets (G7, BRICS) with “Apply to left/right”
+- ML: House Prices – upload `ml_immo/data/house_prices/train.csv` (or use example), toggle log‑target
+- Swiss Geo (STAC) – fetch collections, POST /search items, preview/download assets
 - Tabs (Inequalities)
   - Time series: multi‑country lines (left/right panels)
   - Latest values: last available value per country in period
@@ -74,6 +88,7 @@ Architecture overview
 - Streamlit + Plotly for the app UI and interactive charts
 - Pandas for data wrangling (long format: `country, year, indicator, value`)
 - Scikit‑learn in notebooks (house prices, spam classification)
+- STAC client (requests) for Swiss geodata browsing/downloads
 
 Sample dataset
 - `exploration_inegalites/data/inegalites_sample.csv`
@@ -92,6 +107,7 @@ Optional improvements (roadmap)
 - Per‑capita toggle for climate variables
 - Caching for large CSV uploads
 - Simple unit tests for data loading and transformations
+ - Geopandas‑based preview for STAC GeoJSON (map)
 
 ### Contact
 - GitHub: `michaelgermini`  
