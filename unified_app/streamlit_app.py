@@ -6,14 +6,17 @@ from pathlib import Path
  
 # ML/Preprocessing imports for House Prices page
 import numpy as np
-from sklearn.model_selection import KFold, cross_val_predict
-from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.model_selection import KFold, cross_val_predict, train_test_split
+from sklearn.metrics import mean_squared_error, r2_score, precision_recall_fscore_support, accuracy_score, confusion_matrix
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import Ridge, Lasso
 from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.linear_model import LogisticRegression
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 
 st.set_page_config(page_title="Unified dashboards – Inequalities & Climate", layout="wide")
@@ -310,7 +313,7 @@ def render_climat() -> None:
     st.caption("Source: Our World in Data (OWID).")
 
 
-st.sidebar.title("Navigation")
+st.sidebar.title("Data Science Portfolio")
 page = st.sidebar.radio(
     "Section",
     [
@@ -318,8 +321,11 @@ page = st.sidebar.radio(
         "Climate & Energy",
         "ML: House Prices",
         "ML: Spam Classification",
+        "DL: Image Classification",
+        "DL: Chatbot NLP",
         "Data for Good: AQI Forecast",
         "Data for Good: Local Climate 2050",
+        "Storytelling: Pandemics Map",
         "Storytelling notes",
         "Swiss Geo (STAC)",
     ],
@@ -341,10 +347,22 @@ elif page == "ML: House Prices":
         uploaded_train = st.file_uploader("Upload Kaggle train.csv", type=["csv"], key="hp_train")
         use_log = st.checkbox("Use log target (log1p(SalePrice))", value=True)
 
+        # Auto-use bundled sample if no upload
+        sample_path = Path(__file__).resolve().parents[1] / "ml_immo" / "data" / "house_prices" / "train.csv"
         if uploaded_train is None:
-            st.info("Upload the Kaggle training file to see metrics and charts.")
-            st.markdown("Notebook: `ml_immo/notebooks/house_prices_modeling.ipynb`")
-            return
+            if sample_path.exists():
+                st.caption(f"Using bundled sample: `{sample_path.as_posix()}`")
+                st.download_button(
+                    label="Download sample CSV",
+                    data=sample_path.read_bytes(),
+                    file_name="train_sample.csv",
+                    mime="text/csv",
+                )
+                uploaded_train = sample_path.open("rb")
+            else:
+                st.info("Upload the Kaggle training file to see metrics and charts. The bundled sample is not available.")
+                st.markdown("Notebook: `ml_immo/notebooks/house_prices_modeling.ipynb`")
+                return
 
         # Load data
         try:
@@ -461,16 +479,139 @@ elif page == "ML: Spam Classification":
         st.header("ML – Spam vs Ham (text classification)")
         st.caption("TF‑IDF + Logistic Regression / Naive Bayes; reports Precision/Recall/F1.")
         st.markdown("Notebook path: `spam_classification/notebooks/spam_classification.ipynb`")
-        st.markdown("Run locally:")
-        st.code(
-            """
-            # in project root
-            .venv\\Scripts\\activate  # if you use the venv
-            jupyter lab spam_classification/notebooks/spam_classification.ipynb
-            """,
-            language="bash",
-        )
-        st.markdown("Data: put `spam.csv` under `spam_classification/data/` with columns `text`, `label`.")
+
+        uploaded = st.file_uploader("Upload spam.csv (columns: text, label)", type=["csv"], key="spam_csv")
+        sample_path = Path(__file__).resolve().parents[1] / "spam_classification" / "data" / "spam.csv"
+        if uploaded is None:
+            if sample_path.exists():
+                st.caption(f"Using bundled sample: `{sample_path.as_posix()}`")
+                st.download_button(
+                    label="Download sample CSV",
+                    data=sample_path.read_bytes(),
+                    file_name="spam_sample.csv",
+                    mime="text/csv",
+                )
+                uploaded = sample_path.open("rb")
+            else:
+                st.info("Upload a CSV with `text,label` to run the classification.")
+                return
+
+        try:
+            df = pd.read_csv(uploaded)
+        except Exception as e:
+            st.error(f"Could not read CSV: {e}")
+            return
+
+        # Basic validation
+        expected_cols = {"text", "label"}
+        if not expected_cols.issubset(set(c.lower() for c in df.columns)):
+            st.error("CSV must contain columns `text` and `label` (case-insensitive).")
+            return
+        # Normalize column names
+        df.columns = [c.lower() for c in df.columns]
+        df = df.dropna(subset=["text", "label"]).copy()
+        df["label"] = df["label"].astype(str).str.strip().str.lower()
+
+        # Controls
+        colc1, colc2, colc3 = st.columns(3)
+        with colc1:
+            model_choices = st.multiselect("Models", ["Logistic Regression", "Naive Bayes"], default=["Logistic Regression", "Naive Bayes"]) 
+        with colc2:
+            test_size = st.slider("Test size", min_value=0.1, max_value=0.5, value=0.2, step=0.05)
+        with colc3:
+            use_bigrams = st.checkbox("Use bigrams (1-2)", value=True)
+
+        X = df["text"].astype(str).values
+        y = df["label"].values
+        try:
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, stratify=y, random_state=42)
+        except Exception:
+            # Fallback without stratify if few samples
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=42)
+
+        ngram_range = (1, 2) if use_bigrams else (1, 1)
+        vectorizer = TfidfVectorizer(stop_words="english", ngram_range=ngram_range)
+
+        results = []
+        trained = {}
+        for name in model_choices:
+            if name == "Logistic Regression":
+                clf = LogisticRegression(max_iter=500)
+            elif name == "Naive Bayes":
+                clf = MultinomialNB()
+            else:
+                continue
+            pipe = Pipeline([
+                ("tfidf", vectorizer),
+                ("clf", clf),
+            ])
+            try:
+                pipe.fit(X_train, y_train)
+                y_pred = pipe.predict(X_test)
+                acc = float(accuracy_score(y_test, y_pred))
+                prec, rec, f1, _ = precision_recall_fscore_support(y_test, y_pred, average="weighted", zero_division=0)
+                results.append((name, acc, float(prec), float(rec), float(f1)))
+                trained[name] = pipe
+            except Exception as e:
+                st.warning(f"{name} failed to train: {e}")
+
+        if not results:
+            st.error("No model could be trained. Check your dataset.")
+            return
+
+        res_df = pd.DataFrame(results, columns=["Model", "Accuracy", "Precision (weighted)", "Recall (weighted)", "F1 (weighted)"]).sort_values("F1 (weighted)", ascending=False)
+        st.dataframe(res_df, use_container_width=True)
+
+        # Select model for diagnostics
+        best_model = res_df.iloc[0, 0]
+        model_to_show = st.selectbox("Diagnostics for model", res_df["Model"].tolist(), index=0)
+        pipe = trained.get(model_to_show, trained.get(best_model))
+
+        # Confusion matrix
+        y_pred_show = pipe.predict(X_test)
+        labels_sorted = sorted(pd.unique(np.concatenate([y_test, y_pred_show])))
+        cm = confusion_matrix(y_test, y_pred_show, labels=labels_sorted)
+        fig_cm = px.imshow(cm, text_auto=True, x=labels_sorted, y=labels_sorted, title=f"Confusion matrix – {model_to_show}")
+        fig_cm.update_xaxes(title_text="Predicted")
+        fig_cm.update_yaxes(title_text="Actual")
+        st.plotly_chart(fig_cm, use_container_width=True)
+
+        # Top features for Logistic Regression
+        if model_to_show == "Logistic Regression":
+            try:
+                lr = pipe.named_steps["clf"]
+                tfidf = pipe.named_steps["tfidf"]
+                feature_names = tfidf.get_feature_names_out()
+                # For binary, coef shape (1, n_features)
+                coefs = lr.coef_[0] if lr.coef_.ndim == 2 else lr.coef_
+                top_idx = np.argsort(coefs)[-20:][::-1]
+                bot_idx = np.argsort(coefs)[:20]
+                top_df = pd.DataFrame({"feature": feature_names[top_idx], "weight": coefs[top_idx]})
+                bot_df = pd.DataFrame({"feature": feature_names[bot_idx], "weight": coefs[bot_idx]})
+                colf1, colf2 = st.columns(2)
+                with colf1:
+                    st.subheader("Top tokens (spam leaning)")
+                    st.plotly_chart(px.bar(top_df, x="weight", y="feature", orientation="h"), use_container_width=True)
+                with colf2:
+                    st.subheader("Top tokens (ham leaning)")
+                    st.plotly_chart(px.bar(bot_df, x="weight", y="feature", orientation="h"), use_container_width=True)
+            except Exception:
+                st.info("Feature weights not available.")
+
+        st.subheader("Try it")
+        user_text = st.text_input("Type a message to classify", value="Win a free ticket now! Reply YES to claim.")
+        if user_text:
+            try:
+                pred = pipe.predict([user_text])[0]
+                if hasattr(pipe.named_steps["clf"], "predict_proba"):
+                    proba = pipe.predict_proba([user_text])[0]
+                    proba_map = {cls: float(p) for cls, p in zip(pipe.classes_, proba)}
+                    st.write({"prediction": pred, "proba": proba_map})
+                else:
+                    st.write({"prediction": pred})
+            except Exception as e:
+                st.warning(f"Could not classify input: {e}")
+
     render_ml_spam()
 elif page == "Data for Good: AQI Forecast":
     def render_dfg_aqi() -> None:
@@ -504,6 +645,216 @@ elif page == "Data for Good: Local Climate 2050":
         )
         st.markdown("Data: `data_for_good/local_climate_projection/data/local_temp.csv` with columns `date, tmean`.")
     render_dfg_climate()
+elif page == "DL: Image Classification":
+    def render_dl_image() -> None:
+        st.header("Deep Learning – Image Classification")
+        st.caption("CNNs/transfer learning (e.g., ResNet/EfficientNet) on a small image dataset.")
+
+        data_root = Path("deep_learning/image_classification/data")
+        data_root.mkdir(parents=True, exist_ok=True)
+
+        # Lazy imports to avoid crashing if torch isn't installed
+        try:
+            import torch  # type: ignore
+            import torch.nn as nn  # type: ignore
+            from torch.utils.data import DataLoader, random_split  # type: ignore
+            import torchvision  # type: ignore
+            from torchvision import datasets, transforms  # type: ignore
+            from torchvision.models import resnet18, efficientnet_b0  # type: ignore
+            from torchvision.models import ResNet18_Weights, EfficientNet_B0_Weights  # type: ignore
+            TORCH_OK = True
+        except Exception as e:
+            TORCH_OK = False
+            st.warning("PyTorch/torchvision not available. Install dependencies to enable training: `pip install -r requirements.txt`.")
+            st.stop()
+
+        def list_classes(root: Path):
+            if not root.exists():
+                return []
+            return [p.name for p in root.iterdir() if p.is_dir()]
+
+        def generate_synthetic_dataset(root: Path, num_per_class: int = 40, size: int = 128) -> None:
+            from PIL import Image, ImageDraw  # pillow is available
+            import random
+            classes = {
+                "red": (220, 40, 40),
+                "green": (40, 180, 90),
+                "blue": (70, 120, 230),
+            }
+            for cls, color in classes.items():
+                cls_dir = root / cls
+                cls_dir.mkdir(parents=True, exist_ok=True)
+                for i in range(num_per_class):
+                    img = Image.new("RGB", (size, size), (255, 255, 255))
+                    draw = ImageDraw.Draw(img)
+                    # random rectangle
+                    x0 = random.randint(0, size // 3)
+                    y0 = random.randint(0, size // 3)
+                    x1 = random.randint(size // 2, size)
+                    y1 = random.randint(size // 2, size)
+                    draw.rectangle([x0, y0, x1, y1], fill=color)
+                    img.save(cls_dir / f"img_{i:03d}.png")
+
+        with st.sidebar:
+            st.subheader("Data – Image Classification")
+            st.markdown("Root: `deep_learning/image_classification/data/`")
+            if st.button("Generate tiny synthetic dataset (3 classes)"):
+                generate_synthetic_dataset(data_root)
+                st.success("Synthetic dataset generated (classes: red, green, blue).")
+
+            subdirs = list_classes(data_root)
+            st.caption(f"Detected classes: {', '.join(subdirs) if subdirs else 'none'}")
+
+        if not list_classes(data_root):
+            st.info("Put images under `deep_learning/image_classification/data/` in subfolders per class (e.g., `cats/`, `dogs/`), or use the synthetic dataset generator in the sidebar.")
+            st.markdown("Notebook path: `deep_learning/image_classification/notebooks/image_classification.ipynb`")
+            st.stop()
+
+        # Controls
+        colm1, colm2, colm3, colm4 = st.columns(4)
+        with colm1:
+            model_name = st.selectbox("Model", ["ResNet18", "EfficientNet-B0"], index=0)
+        with colm2:
+            epochs = st.number_input("Epochs", min_value=1, max_value=10, value=2, step=1)
+        with colm3:
+            batch_size = st.selectbox("Batch size", [8, 16, 32], index=1)
+        with colm4:
+            lr = st.selectbox("Learning rate", [1e-3, 5e-4, 1e-4], index=0)
+        freeze_backbone = st.checkbox("Freeze backbone (feature extractor)", value=True)
+        val_split = st.slider("Validation split", min_value=0.1, max_value=0.5, value=0.2, step=0.05)
+
+        # Data pipeline
+        img_size = 224
+        tf_train = transforms.Compose([
+            transforms.Resize((img_size, img_size)),
+            transforms.RandomHorizontalFlip(),
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+        ])
+        tf_val = transforms.Compose([
+            transforms.Resize((img_size, img_size)),
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+        ])
+
+        full_ds = datasets.ImageFolder(str(data_root), transform=tf_train)
+        num_classes = len(full_ds.classes)
+        n_total = len(full_ds)
+        n_val = max(1, int(n_total * val_split))
+        n_train = n_total - n_val
+        train_ds, val_ds = random_split(full_ds, [n_train, n_val])
+        # Set validation transform
+        val_ds.dataset.transform = tf_val
+
+        train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True)
+        val_loader = DataLoader(val_ds, batch_size=batch_size, shuffle=False)
+
+        # Model
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        if model_name == "ResNet18":
+            weights = ResNet18_Weights.DEFAULT
+            model = resnet18(weights=weights)
+            in_features = model.fc.in_features
+            model.fc = nn.Linear(in_features, num_classes)
+        else:
+            weights = EfficientNet_B0_Weights.DEFAULT
+            model = efficientnet_b0(weights=weights)
+            in_features = model.classifier[1].in_features
+            model.classifier[1] = nn.Linear(in_features, num_classes)
+
+        if freeze_backbone:
+            for name, p in model.named_parameters():
+                if (model_name == "ResNet18" and not name.startswith("fc")) or (model_name != "ResNet18" and not name.startswith("classifier.1")):
+                    p.requires_grad = False
+
+        model = model.to(device)
+        criterion = nn.CrossEntropyLoss()
+        optimizer = torch.optim.AdamW(filter(lambda p: p.requires_grad, model.parameters()), lr=float(lr))
+
+        train_btn = st.button("Train")
+        if train_btn:
+            prog = st.progress(0)
+            hist = []
+            for epoch in range(int(epochs)):
+                model.train()
+                running_loss = 0.0
+                for xb, yb in train_loader:
+                    xb = xb.to(device)
+                    yb = yb.to(device)
+                    optimizer.zero_grad()
+                    out = model(xb)
+                    loss = criterion(out, yb)
+                    loss.backward()
+                    optimizer.step()
+                    running_loss += float(loss.item()) * xb.size(0)
+
+                # Validation
+                model.eval()
+                all_preds = []
+                all_true = []
+                with torch.no_grad():
+                    for xb, yb in val_loader:
+                        xb = xb.to(device)
+                        yb = yb.to(device)
+                        logits = model(xb)
+                        preds = torch.argmax(logits, dim=1)
+                        all_preds.append(preds.cpu().numpy())
+                        all_true.append(yb.cpu().numpy())
+
+                all_preds_np = np.concatenate(all_preds) if all_preds else np.array([])
+                all_true_np = np.concatenate(all_true) if all_true else np.array([])
+                acc = float(accuracy_score(all_true_np, all_preds_np)) if all_true_np.size else 0.0
+                prec, rec, f1, _ = precision_recall_fscore_support(all_true_np, all_preds_np, average=None, labels=list(range(num_classes)), zero_division=0)
+                hist.append({"epoch": epoch + 1, "train_loss": running_loss / max(1, n_train), "val_acc": acc})
+                prog.progress(int((epoch + 1) / int(epochs) * 100))
+
+            # KPIs
+            c1, c2 = st.columns(2)
+            c1.metric("Val accuracy", f"{acc:.3f}")
+            c2.metric("Epochs", str(epochs))
+
+            # Confusion matrix
+            cm = confusion_matrix(all_true_np, all_preds_np, labels=list(range(num_classes)))
+            fig_cm = px.imshow(cm, text_auto=True, x=full_ds.classes, y=full_ds.classes, title="Confusion matrix")
+            fig_cm.update_xaxes(title_text="Predicted")
+            fig_cm.update_yaxes(title_text="Actual")
+            st.plotly_chart(fig_cm, use_container_width=True)
+
+            # Per-class F1
+            per_class = pd.DataFrame({
+                "class": full_ds.classes,
+                "precision": prec,
+                "recall": rec,
+                "f1": f1,
+            })
+            st.dataframe(per_class, use_container_width=True)
+
+            # Save
+            out_dir = Path("deep_learning/image_classification/models"); out_dir.mkdir(parents=True, exist_ok=True)
+            out_path = out_dir / f"{model_name.lower().replace(' ', '_')}_finetuned.pt"
+            torch.save(model.state_dict(), out_path)
+            st.success(f"Model saved: {out_path}")
+
+        st.markdown("Notebook path: `deep_learning/image_classification/notebooks/image_classification.ipynb`")
+        st.markdown("KPIs: accuracy, confusion matrix, per‑class F1.")
+    render_dl_image()
+elif page == "DL: Chatbot NLP":
+    def render_dl_chatbot() -> None:
+        st.header("Deep Learning – Chatbot NLP")
+        st.caption("Intent classification + simple Q&A using LSTM/Transformers (e.g., DistilBERT).")
+        st.markdown("Notebook path: `deep_learning/chatbot_nlp/notebooks/chatbot_nlp.ipynb`")
+        st.markdown("Run locally:")
+        st.code(
+            """
+            # in project root
+            .venv\\Scripts\\activate  # if you use the venv
+            jupyter lab deep_learning/chatbot_nlp/notebooks/chatbot_nlp.ipynb
+            """,
+            language="bash",
+        )
+        st.markdown("Data: CSV/JSON with `text` and `intent` (and optional `answer`).")
+        st.markdown("KPIs: Precision/Recall/F1; demo: type a question and see top intent + answer.")
+    render_dl_chatbot()
 elif page == "Storytelling notes":
     def render_story_notes() -> None:
         st.header("Data storytelling notes")
@@ -514,6 +865,23 @@ elif page == "Storytelling notes":
         st.markdown("- Color‑blind friendly palettes and mobile layout")
         st.markdown("See: `data_storytelling/README.md`.")
     render_story_notes()
+elif page == "Storytelling: Pandemics Map":
+    def render_pandemics_map() -> None:
+        st.header("Storytelling – Historical Pandemics Map")
+        st.caption("Interactive Folium map showing spread by year; link to sources (WHO + historical archives).")
+        st.markdown("Notebook path: `data_storytelling/pandemics_map/notebooks/pandemics_map.ipynb`")
+        st.markdown("Run locally:")
+        st.code(
+            """
+            # in project root
+            .venv\\Scripts\\activate  # if you use the venv
+            jupyter lab data_storytelling/pandemics_map/notebooks/pandemics_map.ipynb
+            """,
+            language="bash",
+        )
+        st.markdown("Data: CSV with `year, country, cases, deaths, disease`.")
+        st.info("A live Folium preview inside the app can be added later once the dataset is finalized.")
+    render_pandemics_map()
 
 elif page == "Swiss Geo (STAC)":
     def render_stac() -> None:
@@ -634,8 +1002,8 @@ elif page == "Swiss Geo (STAC)":
 # Sidebar footer with portfolio titles and contact
 with st.sidebar:
     st.markdown("---")
-    st.markdown("**CO₂ & Energy evolution – Interactive dashboard**")
-    st.markdown("**Global inequalities – Country comparator**")
+    st.markdown("CO₂ & Energy evolution – Interactive dashboard")
+    st.markdown("Global inequalities – Country comparator")
     st.markdown("GitHub: [michaelgermini](https://github.com/michaelgermini)")
     st.markdown("Contact: [michael@germini.info](mailto:michael@germini.info)")
 

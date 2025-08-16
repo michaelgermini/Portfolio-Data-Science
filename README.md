@@ -1,116 +1,84 @@
 ## Data Science Portfolio – Unified Streamlit App
 
-This portfolio demonstrates end‑to‑end data skills: multi‑source ingestion, cleaning, interactive analytics, machine learning, and geospatial browsing. The unified Streamlit app provides a single entry point to:
-- Compare global inequalities (country‑level indicators)
-- Explore climate & energy trends with a 3D timeline
-- Run ML demos (house prices, spam)
-- Browse Swiss geodata via STAC and download assets
+A single, polished Streamlit app that showcases end‑to‑end data skills: multi‑source ingestion, cleaning, interactive analytics, classic ML, deep learning, and geospatial browsing.
 
-### What’s inside (Unified App)
+### Highlights
+- Inequalities: side‑by‑side country comparator with presets (G7, BRICS), tabs (Time series, Latest, Ranking), deep‑linking via URL, and offline‑friendly sample auto‑load
+- Climate & Energy: 3D timeline for CO₂ vs energy metrics, plus regular time series; country filter by name or ISO code
+- ML Demos: Kaggle House Prices (regression) and Spam vs Ham (text classification) with interpretable visuals
+- Deep Learning Demos: Image classification (ResNet18/EfficientNet‑B0, transfer learning) with a built‑in synthetic dataset generator
+- Swiss Geo (STAC): browse federal geodata collections/items and download assets
+
+### Unified App – Pages
 - Inequalities (Country comparator)
-  - Side‑by‑side country selection (left/right panels)
-  - Indicators supported by default: GDP per capita, plus any custom indicators via CSV
-  - Tabs: Time series, Latest values (table), Ranking (top 25, year selector)
-  - Presets: G7, BRICS; quick apply to left/right
-  - Deep‑linking: selections can be encoded in the URL
-  - Offline‑friendly: auto‑loads a sample dataset at startup
+  - Upload tidy CSVs or use defaults; indicators in long format: `country, year, indicator, value`
+  - Tabs: Time series, Latest values, Ranking; presets for quick selections
+  - Deep‑linking: selections encoded in the URL query string
 - Climate & Energy
-  - 3D timeline (decade scrub) for CO₂ vs energy metrics
-  - Time series per metric
-  - Country filter by name or ISO code
-- ML: House Prices
-  - Upload Kaggle `train.csv`; optional log‑target
-  - 5‑fold CV metrics (RMSE, R²), Predicted vs Actual, Residuals, Top features
+  - 3D animated timeline by decade with Plotly
+  - Secondary 2D time series chart for the selected metric
+- ML: House Prices (regression)
+  - Upload Kaggle `train.csv` or auto‑use bundled sample
+  - 5‑fold CV metrics (RMSE, R²), Predicted vs Actual, Residuals, Top features (GBR)
 - ML: Spam Classification
-  - TF‑IDF + Logistic Regression/Naive Bayes; Precision/Recall/F1
+  - TF‑IDF + Logistic Regression/Naive Bayes; reports Accuracy, Precision/Recall/F1
+  - Try‑it input box to classify your own text
+- DL: Image Classification
+  - Transfer learning: ResNet18/EfficientNet‑B0 on your foldered dataset
+  - Sidebar button to generate a tiny synthetic dataset (classes: red/green/blue)
+  - KPIs: validation accuracy, confusion matrix, per‑class F1; saves a finetuned model
+- DL: Chatbot NLP (notebook scaffold)
+- Data for Good: AQI Forecast & Local Climate 2050 (notebook scaffolds)
+- Storytelling: Pandemics Map (notebook scaffold)
 - Swiss Geo (STAC)
-  - List collections, search items (bbox, datetime), preview assets, download to `data_sources/geo_admin/`
+  - List collections, search items (bbox/datetime), preview JSON/GeoJSON, download assets to `data_sources/geo_admin/`
 
-Why it’s useful
-- Compare countries quickly across key indicators for health, education, water access, and prosperity
-- Explore climate and energy trajectories with an intuitive 3D animation
-- Extend with your own data by dropping tidy CSVs (long format)
+### Quickstart
+- Python 3.11 recommended
+- Install dependencies:
+  - `pip install -r requirements.txt`
+- Run the unified app:
+  - `python -m streamlit run "unified_app/streamlit_app.py"`
 
-Data format hints
-- Long/tidy format for inequalities: `country, year, indicator, value`
-- The unified app auto‑loads `exploration_inegalites/data/inegalites_sample.csv` when no upload is provided
-- Climate page loads OWID CO₂ when internet is available
-
-### Getting started
-- Create a Python 3.10+ environment (recommended)
-- Install dependencies: `pip install -r requirements.txt`
-- Run a Streamlit dashboard:
-  - Inequalities: `streamlit run "exploration_inegalites/app/streamlit_app.py"`
-  - Climate & Energy: `streamlit run "climat_energie/app/streamlit_app.py"`
-  - Unified app: `streamlit run "unified_app/streamlit_app.py"`
-
-On Windows (optional venv)
+On Windows (venv recommended)
 ```
 python -m venv .venv
 .venv\Scripts\activate
-pip install -r requirements.txt
-streamlit run "unified_app/streamlit_app.py"
+python -m pip install -r requirements.txt
+python -m streamlit run "unified_app/streamlit_app.py"
 ```
 
-### Structure
-- `exploration_inegalites/`: compare health, education, water access, GDP/capita (comparative dashboard)
-- `climat_energie/`: CO₂ & energy consumption, 3D timeline (dashboard)
-- `ml_immo/`: house price regression (Kaggle House Prices) – notebook
-- `spam_classification/`: spam vs ham – notebook
-- `data_storytelling/`: components for narrative (reused by dashboards)
-- `data_for_good/`: air quality forecast & local climate – notebooks (skeletons)
+### Data & Samples
+- Inequalities sample auto‑generated on first run if missing:
+  - `exploration_inegalites/data/inegalites_sample.csv`
+- House Prices sample (for quick demo):
+  - `ml_immo/data/house_prices/train.csv`
+- Spam classification sample (auto‑loaded if no CSV uploaded):
+  - `spam_classification/data/spam.csv`
+- Image classification synthetic dataset (use sidebar button or CLI):
+  - Path: `deep_learning/image_classification/data/`
+  - CLI: `python deep_learning/image_classification/utils/generate_synthetic_dataset.py`
 
-### Data
-Apps can automatically download public datasets (OWID/WorldBank) if internet is available. Otherwise, you can import your own CSV via the interface.
+### Development Notes
+- App UI: Streamlit + Plotly; data wrangling with pandas
+- ML: scikit‑learn (regression/classification)
+- DL: torch/torchvision (CPU by default); transfer learning for image classification
+- STAC: simple `requests` client to query `data.geo.admin.ch` STAC API
 
-Primary sources
-- Our World in Data (OWID): CO₂ data and related energy metrics
-- World Bank / UN / IMF: socio‑economic indicators for inequalities
-- Swiss federal geodata (STAC): collections, items and assets (GeoJSON/GeoTIFF) via STAC API
-
-### Notes
-- Some heavy libraries (deep learning) are not in the base `requirements.txt` to keep installation light. See notebook sections for optional installs.
-
-### Unified app – Navigation and usage
-- Sidebar
-  - Section switcher: Inequalities, Climate & Energy
-  - Upload CSV and choose default indicator (inequalities)
-  - Country selectors for left/right, period slider
-  - Presets (G7, BRICS) with “Apply to left/right”
-- ML: House Prices – upload `ml_immo/data/house_prices/train.csv` (or use example), toggle log‑target
-- Swiss Geo (STAC) – fetch collections, POST /search items, preview/download assets
-- Tabs (Inequalities)
-  - Time series: multi‑country lines (left/right panels)
-  - Latest values: last available value per country in period
-  - Ranking: top 25 countries by chosen indicator for a selected year
-
-Architecture overview
-- Streamlit + Plotly for the app UI and interactive charts
-- Pandas for data wrangling (long format: `country, year, indicator, value`)
-- Scikit‑learn in notebooks (house prices, spam classification)
-- STAC client (requests) for Swiss geodata browsing/downloads
-
-Sample dataset
-- `exploration_inegalites/data/inegalites_sample.csv`
-  - Countries: France, Germany, United States, India, Nigeria, Brazil, China, South Africa
-  - Indicators: `gdp_per_capita_usd`, `life_expectancy_years`, `school_enrollment_primary_percent`, `water_access_percent`
-  - Years: 2000, 2005, 2010, 2015, 2020
+### Security & Quality
+- Linting: Ruff
+- Dependency audit: pip‑audit (clean as of last run)
+- SAST: Bandit (basic scan)
+- Updated: `requests==2.32.4` (addresses GHSA‑9hjg‑9r4m‑mvj7)
 
 ### Deploy on Streamlit Community Cloud
-- Repository: `michaelgermini/Portfolio-Data-Science`
+- Repository: `michaelgermini/portfolio-data-science`
 - App file: `unified_app/streamlit_app.py`
-- Python version: 3.11
-- Requirements file: `requirements.txt`
-
-Optional improvements (roadmap)
-- Add map view for inequalities (choropleth)
-- Per‑capita toggle for climate variables
-- Caching for large CSV uploads
-- Simple unit tests for data loading and transformations
- - Geopandas‑based preview for STAC GeoJSON (map)
+- Python: 3.11
+- Requirements: `requirements.txt`
 
 ### Contact
-- GitHub: `michaelgermini`  
+- GitHub: `michaelgermini`
 - Email: `michael@germini.info`
 
 

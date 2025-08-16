@@ -1,0 +1,9 @@
+numpy
+pandas
+scikit-learn
+statsmodels
+matplotlib
+streamlit
+# Optional (comment in if needed):
+# prophet
+# tensorflow
