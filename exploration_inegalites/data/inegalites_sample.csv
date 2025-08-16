@@ -1,162 +1,1261 @@
-country,year,indicator,value
-France,2000,gdp_per_capita_usd,28000
-France,2005,gdp_per_capita_usd,33000
-France,2010,gdp_per_capita_usd,40000
-France,2015,gdp_per_capita_usd,38000
-France,2020,gdp_per_capita_usd,39000
-Germany,2000,gdp_per_capita_usd,25000
-Germany,2005,gdp_per_capita_usd,32000
-Germany,2010,gdp_per_capita_usd,41000
-Germany,2015,gdp_per_capita_usd,41000
-Germany,2020,gdp_per_capita_usd,46000
-United States,2000,gdp_per_capita_usd,36000
-United States,2005,gdp_per_capita_usd,46000
-United States,2010,gdp_per_capita_usd,49000
-United States,2015,gdp_per_capita_usd,56000
-United States,2020,gdp_per_capita_usd,63500
-India,2000,gdp_per_capita_usd,450
-India,2005,gdp_per_capita_usd,730
-India,2010,gdp_per_capita_usd,1350
-India,2015,gdp_per_capita_usd,1600
-India,2020,gdp_per_capita_usd,1900
-Nigeria,2000,gdp_per_capita_usd,560
-Nigeria,2005,gdp_per_capita_usd,1100
-Nigeria,2010,gdp_per_capita_usd,2400
-Nigeria,2015,gdp_per_capita_usd,2200
-Nigeria,2020,gdp_per_capita_usd,2100
-Brazil,2000,gdp_per_capita_usd,3700
-Brazil,2005,gdp_per_capita_usd,6200
-Brazil,2010,gdp_per_capita_usd,11000
-Brazil,2015,gdp_per_capita_usd,8800
-Brazil,2020,gdp_per_capita_usd,6800
-France,2000,life_expectancy_years,79.0
-France,2005,life_expectancy_years,80.1
-France,2010,life_expectancy_years,82.0
-France,2015,life_expectancy_years,82.5
-France,2020,life_expectancy_years,82.6
-Germany,2000,life_expectancy_years,78.0
-Germany,2005,life_expectancy_years,79.2
-Germany,2010,life_expectancy_years,80.5
-Germany,2015,life_expectancy_years,81.0
-Germany,2020,life_expectancy_years,81.4
-United States,2000,life_expectancy_years,77.0
-United States,2005,life_expectancy_years,78.2
-United States,2010,life_expectancy_years,78.7
-United States,2015,life_expectancy_years,78.8
-United States,2020,life_expectancy_years,77.0
-India,2000,life_expectancy_years,62.0
-India,2005,life_expectancy_years,65.0
-India,2010,life_expectancy_years,67.5
-India,2015,life_expectancy_years,69.5
-India,2020,life_expectancy_years,70.0
-Nigeria,2000,life_expectancy_years,46.0
-Nigeria,2005,life_expectancy_years,48.0
-Nigeria,2010,life_expectancy_years,52.0
-Nigeria,2015,life_expectancy_years,54.5
-Nigeria,2020,life_expectancy_years,55.0
-Brazil,2000,life_expectancy_years,69.0
-Brazil,2005,life_expectancy_years,71.0
-Brazil,2010,life_expectancy_years,73.0
-Brazil,2015,life_expectancy_years,75.0
-Brazil,2020,life_expectancy_years,76.6
-France,2000,school_enrollment_primary_percent,99.5
-France,2005,school_enrollment_primary_percent,99.7
-France,2010,school_enrollment_primary_percent,99.8
-France,2015,school_enrollment_primary_percent,99.8
-France,2020,school_enrollment_primary_percent,99.9
-Germany,2000,school_enrollment_primary_percent,99.0
-Germany,2005,school_enrollment_primary_percent,99.3
-Germany,2010,school_enrollment_primary_percent,99.5
-Germany,2015,school_enrollment_primary_percent,99.6
-Germany,2020,school_enrollment_primary_percent,99.7
-United States,2000,school_enrollment_primary_percent,95.0
-United States,2005,school_enrollment_primary_percent,95.5
-United States,2010,school_enrollment_primary_percent,96.0
-United States,2015,school_enrollment_primary_percent,96.5
-United States,2020,school_enrollment_primary_percent,97.0
-India,2000,school_enrollment_primary_percent,90.0
-India,2005,school_enrollment_primary_percent,92.0
-India,2010,school_enrollment_primary_percent,94.0
-India,2015,school_enrollment_primary_percent,96.0
-India,2020,school_enrollment_primary_percent,97.0
-Nigeria,2000,school_enrollment_primary_percent,60.0
-Nigeria,2005,school_enrollment_primary_percent,63.0
-Nigeria,2010,school_enrollment_primary_percent,66.0
-Nigeria,2015,school_enrollment_primary_percent,68.0
-Nigeria,2020,school_enrollment_primary_percent,70.0
-Brazil,2000,school_enrollment_primary_percent,95.0
-Brazil,2005,school_enrollment_primary_percent,96.0
-Brazil,2010,school_enrollment_primary_percent,97.0
-Brazil,2015,school_enrollment_primary_percent,97.5
-Brazil,2020,school_enrollment_primary_percent,98.0
-France,2000,water_access_percent,99.0
-France,2005,water_access_percent,99.2
-France,2010,water_access_percent,99.4
-France,2015,water_access_percent,99.6
-France,2020,water_access_percent,99.7
-Germany,2000,water_access_percent,99.0
-Germany,2005,water_access_percent,99.2
-Germany,2010,water_access_percent,99.5
-Germany,2015,water_access_percent,99.6
-Germany,2020,water_access_percent,99.8
-United States,2000,water_access_percent,99.0
-United States,2005,water_access_percent,99.1
-United States,2010,water_access_percent,99.2
-United States,2015,water_access_percent,99.3
-United States,2020,water_access_percent,99.4
-India,2000,water_access_percent,80.0
-India,2005,water_access_percent,84.0
-India,2010,water_access_percent,88.0
-India,2015,water_access_percent,91.0
-India,2020,water_access_percent,93.0
-Nigeria,2000,water_access_percent,50.0
-Nigeria,2005,water_access_percent,55.0
-Nigeria,2010,water_access_percent,60.0
-Nigeria,2015,water_access_percent,65.0
-Nigeria,2020,water_access_percent,70.0
-Brazil,2000,water_access_percent,88.0
-Brazil,2005,water_access_percent,91.0
-Brazil,2010,water_access_percent,94.0
-Brazil,2015,water_access_percent,96.0
-Brazil,2020,water_access_percent,97.0
-China,2000,gdp_per_capita_usd,950
-China,2005,gdp_per_capita_usd,1750
-China,2010,gdp_per_capita_usd,4500
-China,2015,gdp_per_capita_usd,8000
-China,2020,gdp_per_capita_usd,10500
-China,2000,life_expectancy_years,71.4
-China,2005,life_expectancy_years,73.0
-China,2010,life_expectancy_years,75.2
-China,2015,life_expectancy_years,76.9
-China,2020,life_expectancy_years,78.0
-China,2000,school_enrollment_primary_percent,97.0
-China,2005,school_enrollment_primary_percent,98.0
-China,2010,school_enrollment_primary_percent,99.0
-China,2015,school_enrollment_primary_percent,99.5
-China,2020,school_enrollment_primary_percent,99.6
-China,2000,water_access_percent,88.0
-China,2005,water_access_percent,92.0
-China,2010,water_access_percent,95.0
-China,2015,water_access_percent,97.0
-China,2020,water_access_percent,98.0
-South Africa,2000,gdp_per_capita_usd,3500
-South Africa,2005,gdp_per_capita_usd,5500
-South Africa,2010,gdp_per_capita_usd,7500
-South Africa,2015,gdp_per_capita_usd,6000
-South Africa,2020,gdp_per_capita_usd,6000
-South Africa,2000,life_expectancy_years,57.0
-South Africa,2005,life_expectancy_years,53.0
-South Africa,2010,life_expectancy_years,57.0
-South Africa,2015,life_expectancy_years,63.0
-South Africa,2020,life_expectancy_years,65.0
-South Africa,2000,school_enrollment_primary_percent,88.0
-South Africa,2005,school_enrollment_primary_percent,90.0
-South Africa,2010,school_enrollment_primary_percent,92.0
-South Africa,2015,school_enrollment_primary_percent,94.0
-South Africa,2020,school_enrollment_primary_percent,96.0
-South Africa,2000,water_access_percent,80.0
-South Africa,2005,water_access_percent,84.0
-South Africa,2010,water_access_percent,86.0
-South Africa,2015,water_access_percent,88.0
-South Africa,2020,water_access_percent,90.0
-
+country,year,indicator,value,unit,source
+France,2000,gdp_per_capita_usd,7956.81,USD,synthetic
+France,2000,life_expectancy_years,59.66,years,synthetic
+France,2000,school_enrollment_primary_percent,70.69,%,synthetic
+France,2000,water_access_percent,59.95,%,synthetic
+France,2001,gdp_per_capita_usd,8317.63,USD,synthetic
+France,2001,life_expectancy_years,66.26,years,synthetic
+France,2001,school_enrollment_primary_percent,83.4,%,synthetic
+France,2001,water_access_percent,77.97,%,synthetic
+France,2002,gdp_per_capita_usd,8455.85,USD,synthetic
+France,2002,life_expectancy_years,72.58,years,synthetic
+France,2002,school_enrollment_primary_percent,100.0,%,synthetic
+France,2002,water_access_percent,100.0,%,synthetic
+France,2003,gdp_per_capita_usd,8706.58,USD,synthetic
+France,2003,life_expectancy_years,80.21,years,synthetic
+France,2003,school_enrollment_primary_percent,100.0,%,synthetic
+France,2003,water_access_percent,100.0,%,synthetic
+France,2004,gdp_per_capita_usd,9066.34,USD,synthetic
+France,2004,life_expectancy_years,88.07,years,synthetic
+France,2004,school_enrollment_primary_percent,100.0,%,synthetic
+France,2004,water_access_percent,100.0,%,synthetic
+France,2005,gdp_per_capita_usd,9196.34,USD,synthetic
+France,2005,life_expectancy_years,96.08,years,synthetic
+France,2005,school_enrollment_primary_percent,100.0,%,synthetic
+France,2005,water_access_percent,100.0,%,synthetic
+France,2006,gdp_per_capita_usd,9629.99,USD,synthetic
+France,2006,life_expectancy_years,105.99,years,synthetic
+France,2006,school_enrollment_primary_percent,100.0,%,synthetic
+France,2006,water_access_percent,100.0,%,synthetic
+France,2007,gdp_per_capita_usd,9852.37,USD,synthetic
+France,2007,life_expectancy_years,117.42,years,synthetic
+France,2007,school_enrollment_primary_percent,100.0,%,synthetic
+France,2007,water_access_percent,100.0,%,synthetic
+France,2008,gdp_per_capita_usd,10066.74,USD,synthetic
+France,2008,life_expectancy_years,128.33,years,synthetic
+France,2008,school_enrollment_primary_percent,100.0,%,synthetic
+France,2008,water_access_percent,100.0,%,synthetic
+France,2009,gdp_per_capita_usd,10481.35,USD,synthetic
+France,2009,life_expectancy_years,141.21,years,synthetic
+France,2009,school_enrollment_primary_percent,100.0,%,synthetic
+France,2009,water_access_percent,100.0,%,synthetic
+France,2010,gdp_per_capita_usd,10723.69,USD,synthetic
+France,2010,life_expectancy_years,155.09,years,synthetic
+France,2010,school_enrollment_primary_percent,100.0,%,synthetic
+France,2010,water_access_percent,100.0,%,synthetic
+France,2011,gdp_per_capita_usd,11141.28,USD,synthetic
+France,2011,life_expectancy_years,171.17,years,synthetic
+France,2011,school_enrollment_primary_percent,100.0,%,synthetic
+France,2011,water_access_percent,100.0,%,synthetic
+France,2012,gdp_per_capita_usd,11457.21,USD,synthetic
+France,2012,life_expectancy_years,188.14,years,synthetic
+France,2012,school_enrollment_primary_percent,100.0,%,synthetic
+France,2012,water_access_percent,100.0,%,synthetic
+France,2013,gdp_per_capita_usd,11815.99,USD,synthetic
+France,2013,life_expectancy_years,207.7,years,synthetic
+France,2013,school_enrollment_primary_percent,100.0,%,synthetic
+France,2013,water_access_percent,100.0,%,synthetic
+France,2014,gdp_per_capita_usd,12179.2,USD,synthetic
+France,2014,life_expectancy_years,227.35,years,synthetic
+France,2014,school_enrollment_primary_percent,100.0,%,synthetic
+France,2014,water_access_percent,100.0,%,synthetic
+France,2015,gdp_per_capita_usd,12497.22,USD,synthetic
+France,2015,life_expectancy_years,251.0,years,synthetic
+France,2015,school_enrollment_primary_percent,100.0,%,synthetic
+France,2015,water_access_percent,100.0,%,synthetic
+France,2016,gdp_per_capita_usd,12846.79,USD,synthetic
+France,2016,life_expectancy_years,276.05,years,synthetic
+France,2016,school_enrollment_primary_percent,100.0,%,synthetic
+France,2016,water_access_percent,100.0,%,synthetic
+France,2017,gdp_per_capita_usd,13212.96,USD,synthetic
+France,2017,life_expectancy_years,302.92,years,synthetic
+France,2017,school_enrollment_primary_percent,100.0,%,synthetic
+France,2017,water_access_percent,100.0,%,synthetic
+France,2018,gdp_per_capita_usd,13679.77,USD,synthetic
+France,2018,life_expectancy_years,334.14,years,synthetic
+France,2018,school_enrollment_primary_percent,100.0,%,synthetic
+France,2018,water_access_percent,100.0,%,synthetic
+France,2019,gdp_per_capita_usd,14090.14,USD,synthetic
+France,2019,life_expectancy_years,367.34,years,synthetic
+France,2019,school_enrollment_primary_percent,100.0,%,synthetic
+France,2019,water_access_percent,100.0,%,synthetic
+France,2020,gdp_per_capita_usd,14468.09,USD,synthetic
+France,2020,life_expectancy_years,403.26,years,synthetic
+France,2020,school_enrollment_primary_percent,100.0,%,synthetic
+France,2020,water_access_percent,100.0,%,synthetic
+Germany,2000,gdp_per_capita_usd,8343.26,USD,synthetic
+Germany,2000,life_expectancy_years,62.96,years,synthetic
+Germany,2000,school_enrollment_primary_percent,72.95,%,synthetic
+Germany,2000,water_access_percent,63.27,%,synthetic
+Germany,2001,gdp_per_capita_usd,8710.97,USD,synthetic
+Germany,2001,life_expectancy_years,69.31,years,synthetic
+Germany,2001,school_enrollment_primary_percent,88.78,%,synthetic
+Germany,2001,water_access_percent,82.34,%,synthetic
+Germany,2002,gdp_per_capita_usd,8852.04,USD,synthetic
+Germany,2002,life_expectancy_years,75.6,years,synthetic
+Germany,2002,school_enrollment_primary_percent,100.0,%,synthetic
+Germany,2002,water_access_percent,100.0,%,synthetic
+Germany,2003,gdp_per_capita_usd,9134.65,USD,synthetic
+Germany,2003,life_expectancy_years,84.14,years,synthetic
+Germany,2003,school_enrollment_primary_percent,100.0,%,synthetic
+Germany,2003,water_access_percent,100.0,%,synthetic
+Germany,2004,gdp_per_capita_usd,9488.63,USD,synthetic
+Germany,2004,life_expectancy_years,91.71,years,synthetic
+Germany,2004,school_enrollment_primary_percent,100.0,%,synthetic
+Germany,2004,water_access_percent,100.0,%,synthetic
+Germany,2005,gdp_per_capita_usd,9660.83,USD,synthetic
+Germany,2005,life_expectancy_years,102.01,years,synthetic
+Germany,2005,school_enrollment_primary_percent,100.0,%,synthetic
+Germany,2005,water_access_percent,100.0,%,synthetic
+Germany,2006,gdp_per_capita_usd,10101.98,USD,synthetic
+Germany,2006,life_expectancy_years,111.25,years,synthetic
+Germany,2006,school_enrollment_primary_percent,100.0,%,synthetic
+Germany,2006,water_access_percent,100.0,%,synthetic
+Germany,2007,gdp_per_capita_usd,10387.41,USD,synthetic
+Germany,2007,life_expectancy_years,122.64,years,synthetic
+Germany,2007,school_enrollment_primary_percent,100.0,%,synthetic
+Germany,2007,water_access_percent,100.0,%,synthetic
+Germany,2008,gdp_per_capita_usd,10622.24,USD,synthetic
+Germany,2008,life_expectancy_years,134.64,years,synthetic
+Germany,2008,school_enrollment_primary_percent,100.0,%,synthetic
+Germany,2008,water_access_percent,100.0,%,synthetic
+Germany,2009,gdp_per_capita_usd,11009.01,USD,synthetic
+Germany,2009,life_expectancy_years,148.69,years,synthetic
+Germany,2009,school_enrollment_primary_percent,100.0,%,synthetic
+Germany,2009,water_access_percent,100.0,%,synthetic
+Germany,2010,gdp_per_capita_usd,11236.27,USD,synthetic
+Germany,2010,life_expectancy_years,162.81,years,synthetic
+Germany,2010,school_enrollment_primary_percent,100.0,%,synthetic
+Germany,2010,water_access_percent,100.0,%,synthetic
+Germany,2011,gdp_per_capita_usd,11603.87,USD,synthetic
+Germany,2011,life_expectancy_years,180.2,years,synthetic
+Germany,2011,school_enrollment_primary_percent,100.0,%,synthetic
+Germany,2011,water_access_percent,100.0,%,synthetic
+Germany,2012,gdp_per_capita_usd,12012.3,USD,synthetic
+Germany,2012,life_expectancy_years,197.65,years,synthetic
+Germany,2012,school_enrollment_primary_percent,100.0,%,synthetic
+Germany,2012,water_access_percent,100.0,%,synthetic
+Germany,2013,gdp_per_capita_usd,12306.15,USD,synthetic
+Germany,2013,life_expectancy_years,218.05,years,synthetic
+Germany,2013,school_enrollment_primary_percent,100.0,%,synthetic
+Germany,2013,water_access_percent,100.0,%,synthetic
+Germany,2014,gdp_per_capita_usd,12730.15,USD,synthetic
+Germany,2014,life_expectancy_years,239.85,years,synthetic
+Germany,2014,school_enrollment_primary_percent,100.0,%,synthetic
+Germany,2014,water_access_percent,100.0,%,synthetic
+Germany,2015,gdp_per_capita_usd,13121.74,USD,synthetic
+Germany,2015,life_expectancy_years,262.89,years,synthetic
+Germany,2015,school_enrollment_primary_percent,100.0,%,synthetic
+Germany,2015,water_access_percent,100.0,%,synthetic
+Germany,2016,gdp_per_capita_usd,13506.22,USD,synthetic
+Germany,2016,life_expectancy_years,289.4,years,synthetic
+Germany,2016,school_enrollment_primary_percent,100.0,%,synthetic
+Germany,2016,water_access_percent,100.0,%,synthetic
+Germany,2017,gdp_per_capita_usd,13876.55,USD,synthetic
+Germany,2017,life_expectancy_years,318.71,years,synthetic
+Germany,2017,school_enrollment_primary_percent,100.0,%,synthetic
+Germany,2017,water_access_percent,100.0,%,synthetic
+Germany,2018,gdp_per_capita_usd,14258.38,USD,synthetic
+Germany,2018,life_expectancy_years,350.2,years,synthetic
+Germany,2018,school_enrollment_primary_percent,100.0,%,synthetic
+Germany,2018,water_access_percent,100.0,%,synthetic
+Germany,2019,gdp_per_capita_usd,14649.74,USD,synthetic
+Germany,2019,life_expectancy_years,385.3,years,synthetic
+Germany,2019,school_enrollment_primary_percent,100.0,%,synthetic
+Germany,2019,water_access_percent,100.0,%,synthetic
+Germany,2020,gdp_per_capita_usd,15097.11,USD,synthetic
+Germany,2020,life_expectancy_years,423.91,years,synthetic
+Germany,2020,school_enrollment_primary_percent,100.0,%,synthetic
+Germany,2020,water_access_percent,100.0,%,synthetic
+United Kingdom,2000,gdp_per_capita_usd,8879.34,USD,synthetic
+United Kingdom,2000,life_expectancy_years,66.61,years,synthetic
+United Kingdom,2000,school_enrollment_primary_percent,77.35,%,synthetic
+United Kingdom,2000,water_access_percent,66.2,%,synthetic
+United Kingdom,2001,gdp_per_capita_usd,9017.53,USD,synthetic
+United Kingdom,2001,life_expectancy_years,72.03,years,synthetic
+United Kingdom,2001,school_enrollment_primary_percent,92.25,%,synthetic
+United Kingdom,2001,water_access_percent,85.42,%,synthetic
+United Kingdom,2002,gdp_per_capita_usd,9342.61,USD,synthetic
+United Kingdom,2002,life_expectancy_years,79.53,years,synthetic
+United Kingdom,2002,school_enrollment_primary_percent,100.0,%,synthetic
+United Kingdom,2002,water_access_percent,100.0,%,synthetic
+United Kingdom,2003,gdp_per_capita_usd,9679.33,USD,synthetic
+United Kingdom,2003,life_expectancy_years,87.96,years,synthetic
+United Kingdom,2003,school_enrollment_primary_percent,100.0,%,synthetic
+United Kingdom,2003,water_access_percent,100.0,%,synthetic
+United Kingdom,2004,gdp_per_capita_usd,9845.98,USD,synthetic
+United Kingdom,2004,life_expectancy_years,96.86,years,synthetic
+United Kingdom,2004,school_enrollment_primary_percent,100.0,%,synthetic
+United Kingdom,2004,water_access_percent,100.0,%,synthetic
+United Kingdom,2005,gdp_per_capita_usd,10284.15,USD,synthetic
+United Kingdom,2005,life_expectancy_years,106.95,years,synthetic
+United Kingdom,2005,school_enrollment_primary_percent,100.0,%,synthetic
+United Kingdom,2005,water_access_percent,100.0,%,synthetic
+United Kingdom,2006,gdp_per_capita_usd,10535.48,USD,synthetic
+United Kingdom,2006,life_expectancy_years,116.88,years,synthetic
+United Kingdom,2006,school_enrollment_primary_percent,100.0,%,synthetic
+United Kingdom,2006,water_access_percent,100.0,%,synthetic
+United Kingdom,2007,gdp_per_capita_usd,10802.73,USD,synthetic
+United Kingdom,2007,life_expectancy_years,129.04,years,synthetic
+United Kingdom,2007,school_enrollment_primary_percent,100.0,%,synthetic
+United Kingdom,2007,water_access_percent,100.0,%,synthetic
+United Kingdom,2008,gdp_per_capita_usd,11129.87,USD,synthetic
+United Kingdom,2008,life_expectancy_years,141.34,years,synthetic
+United Kingdom,2008,school_enrollment_primary_percent,100.0,%,synthetic
+United Kingdom,2008,water_access_percent,100.0,%,synthetic
+United Kingdom,2009,gdp_per_capita_usd,11419.39,USD,synthetic
+United Kingdom,2009,life_expectancy_years,156.28,years,synthetic
+United Kingdom,2009,school_enrollment_primary_percent,100.0,%,synthetic
+United Kingdom,2009,water_access_percent,100.0,%,synthetic
+United Kingdom,2010,gdp_per_capita_usd,11833.47,USD,synthetic
+United Kingdom,2010,life_expectancy_years,170.77,years,synthetic
+United Kingdom,2010,school_enrollment_primary_percent,100.0,%,synthetic
+United Kingdom,2010,water_access_percent,100.0,%,synthetic
+United Kingdom,2011,gdp_per_capita_usd,12152.46,USD,synthetic
+United Kingdom,2011,life_expectancy_years,187.76,years,synthetic
+United Kingdom,2011,school_enrollment_primary_percent,100.0,%,synthetic
+United Kingdom,2011,water_access_percent,100.0,%,synthetic
+United Kingdom,2012,gdp_per_capita_usd,12483.28,USD,synthetic
+United Kingdom,2012,life_expectancy_years,207.72,years,synthetic
+United Kingdom,2012,school_enrollment_primary_percent,100.0,%,synthetic
+United Kingdom,2012,water_access_percent,100.0,%,synthetic
+United Kingdom,2013,gdp_per_capita_usd,12903.39,USD,synthetic
+United Kingdom,2013,life_expectancy_years,227.96,years,synthetic
+United Kingdom,2013,school_enrollment_primary_percent,100.0,%,synthetic
+United Kingdom,2013,water_access_percent,100.0,%,synthetic
+United Kingdom,2014,gdp_per_capita_usd,13341.18,USD,synthetic
+United Kingdom,2014,life_expectancy_years,250.89,years,synthetic
+United Kingdom,2014,school_enrollment_primary_percent,100.0,%,synthetic
+United Kingdom,2014,water_access_percent,100.0,%,synthetic
+United Kingdom,2015,gdp_per_capita_usd,13699.74,USD,synthetic
+United Kingdom,2015,life_expectancy_years,275.8,years,synthetic
+United Kingdom,2015,school_enrollment_primary_percent,100.0,%,synthetic
+United Kingdom,2015,water_access_percent,100.0,%,synthetic
+United Kingdom,2016,gdp_per_capita_usd,14152.97,USD,synthetic
+United Kingdom,2016,life_expectancy_years,303.83,years,synthetic
+United Kingdom,2016,school_enrollment_primary_percent,100.0,%,synthetic
+United Kingdom,2016,water_access_percent,100.0,%,synthetic
+United Kingdom,2017,gdp_per_capita_usd,14526.42,USD,synthetic
+United Kingdom,2017,life_expectancy_years,333.43,years,synthetic
+United Kingdom,2017,school_enrollment_primary_percent,100.0,%,synthetic
+United Kingdom,2017,water_access_percent,100.0,%,synthetic
+United Kingdom,2018,gdp_per_capita_usd,15019.57,USD,synthetic
+United Kingdom,2018,life_expectancy_years,366.66,years,synthetic
+United Kingdom,2018,school_enrollment_primary_percent,100.0,%,synthetic
+United Kingdom,2018,water_access_percent,100.0,%,synthetic
+United Kingdom,2019,gdp_per_capita_usd,15449.83,USD,synthetic
+United Kingdom,2019,life_expectancy_years,404.27,years,synthetic
+United Kingdom,2019,school_enrollment_primary_percent,100.0,%,synthetic
+United Kingdom,2019,water_access_percent,100.0,%,synthetic
+United Kingdom,2020,gdp_per_capita_usd,15964.78,USD,synthetic
+United Kingdom,2020,life_expectancy_years,443.99,years,synthetic
+United Kingdom,2020,school_enrollment_primary_percent,100.0,%,synthetic
+United Kingdom,2020,water_access_percent,100.0,%,synthetic
+Italy,2000,gdp_per_capita_usd,9249.52,USD,synthetic
+Italy,2000,life_expectancy_years,69.41,years,synthetic
+Italy,2000,school_enrollment_primary_percent,80.38,%,synthetic
+Italy,2000,water_access_percent,68.61,%,synthetic
+Italy,2001,gdp_per_capita_usd,9562.43,USD,synthetic
+Italy,2001,life_expectancy_years,76.56,years,synthetic
+Italy,2001,school_enrollment_primary_percent,96.69,%,synthetic
+Italy,2001,water_access_percent,89.13,%,synthetic
+Italy,2002,gdp_per_capita_usd,9838.14,USD,synthetic
+Italy,2002,life_expectancy_years,83.43,years,synthetic
+Italy,2002,school_enrollment_primary_percent,100.0,%,synthetic
+Italy,2002,water_access_percent,100.0,%,synthetic
+Italy,2003,gdp_per_capita_usd,10053.52,USD,synthetic
+Italy,2003,life_expectancy_years,91.73,years,synthetic
+Italy,2003,school_enrollment_primary_percent,100.0,%,synthetic
+Italy,2003,water_access_percent,100.0,%,synthetic
+Italy,2004,gdp_per_capita_usd,10382.49,USD,synthetic
+Italy,2004,life_expectancy_years,101.32,years,synthetic
+Italy,2004,school_enrollment_primary_percent,100.0,%,synthetic
+Italy,2004,water_access_percent,100.0,%,synthetic
+Italy,2005,gdp_per_capita_usd,10739.66,USD,synthetic
+Italy,2005,life_expectancy_years,110.76,years,synthetic
+Italy,2005,school_enrollment_primary_percent,100.0,%,synthetic
+Italy,2005,water_access_percent,100.0,%,synthetic
+Italy,2006,gdp_per_capita_usd,11030.91,USD,synthetic
+Italy,2006,life_expectancy_years,122.12,years,synthetic
+Italy,2006,school_enrollment_primary_percent,100.0,%,synthetic
+Italy,2006,water_access_percent,100.0,%,synthetic
+Italy,2007,gdp_per_capita_usd,11400.14,USD,synthetic
+Italy,2007,life_expectancy_years,134.96,years,synthetic
+Italy,2007,school_enrollment_primary_percent,100.0,%,synthetic
+Italy,2007,water_access_percent,100.0,%,synthetic
+Italy,2008,gdp_per_capita_usd,11602.65,USD,synthetic
+Italy,2008,life_expectancy_years,148.55,years,synthetic
+Italy,2008,school_enrollment_primary_percent,100.0,%,synthetic
+Italy,2008,water_access_percent,100.0,%,synthetic
+Italy,2009,gdp_per_capita_usd,12032.11,USD,synthetic
+Italy,2009,life_expectancy_years,162.38,years,synthetic
+Italy,2009,school_enrollment_primary_percent,100.0,%,synthetic
+Italy,2009,water_access_percent,100.0,%,synthetic
+Italy,2010,gdp_per_capita_usd,12285.97,USD,synthetic
+Italy,2010,life_expectancy_years,179.3,years,synthetic
+Italy,2010,school_enrollment_primary_percent,100.0,%,synthetic
+Italy,2010,water_access_percent,100.0,%,synthetic
+Italy,2011,gdp_per_capita_usd,12742.23,USD,synthetic
+Italy,2011,life_expectancy_years,197.33,years,synthetic
+Italy,2011,school_enrollment_primary_percent,100.0,%,synthetic
+Italy,2011,water_access_percent,100.0,%,synthetic
+Italy,2012,gdp_per_capita_usd,13082.08,USD,synthetic
+Italy,2012,life_expectancy_years,216.87,years,synthetic
+Italy,2012,school_enrollment_primary_percent,100.0,%,synthetic
+Italy,2012,water_access_percent,100.0,%,synthetic
+Italy,2013,gdp_per_capita_usd,13462.64,USD,synthetic
+Italy,2013,life_expectancy_years,238.2,years,synthetic
+Italy,2013,school_enrollment_primary_percent,100.0,%,synthetic
+Italy,2013,water_access_percent,100.0,%,synthetic
+Italy,2014,gdp_per_capita_usd,13898.29,USD,synthetic
+Italy,2014,life_expectancy_years,262.19,years,synthetic
+Italy,2014,school_enrollment_primary_percent,100.0,%,synthetic
+Italy,2014,water_access_percent,100.0,%,synthetic
+Italy,2015,gdp_per_capita_usd,14243.96,USD,synthetic
+Italy,2015,life_expectancy_years,287.69,years,synthetic
+Italy,2015,school_enrollment_primary_percent,100.0,%,synthetic
+Italy,2015,water_access_percent,100.0,%,synthetic
+Italy,2016,gdp_per_capita_usd,14792.65,USD,synthetic
+Italy,2016,life_expectancy_years,317.27,years,synthetic
+Italy,2016,school_enrollment_primary_percent,100.0,%,synthetic
+Italy,2016,water_access_percent,100.0,%,synthetic
+Italy,2017,gdp_per_capita_usd,15190.08,USD,synthetic
+Italy,2017,life_expectancy_years,348.58,years,synthetic
+Italy,2017,school_enrollment_primary_percent,100.0,%,synthetic
+Italy,2017,water_access_percent,100.0,%,synthetic
+Italy,2018,gdp_per_capita_usd,15683.77,USD,synthetic
+Italy,2018,life_expectancy_years,384.12,years,synthetic
+Italy,2018,school_enrollment_primary_percent,100.0,%,synthetic
+Italy,2018,water_access_percent,100.0,%,synthetic
+Italy,2019,gdp_per_capita_usd,16087.19,USD,synthetic
+Italy,2019,life_expectancy_years,422.51,years,synthetic
+Italy,2019,school_enrollment_primary_percent,100.0,%,synthetic
+Italy,2019,water_access_percent,100.0,%,synthetic
+Italy,2020,gdp_per_capita_usd,16588.6,USD,synthetic
+Italy,2020,life_expectancy_years,464.28,years,synthetic
+Italy,2020,school_enrollment_primary_percent,100.0,%,synthetic
+Italy,2020,water_access_percent,100.0,%,synthetic
+Spain,2000,gdp_per_capita_usd,9638.73,USD,synthetic
+Spain,2000,life_expectancy_years,71.51,years,synthetic
+Spain,2000,school_enrollment_primary_percent,84.7,%,synthetic
+Spain,2000,water_access_percent,71.93,%,synthetic
+Spain,2001,gdp_per_capita_usd,9831.85,USD,synthetic
+Spain,2001,life_expectancy_years,79.5,years,synthetic
+Spain,2001,school_enrollment_primary_percent,100.0,%,synthetic
+Spain,2001,water_access_percent,93.65,%,synthetic
+Spain,2002,gdp_per_capita_usd,10223.76,USD,synthetic
+Spain,2002,life_expectancy_years,87.23,years,synthetic
+Spain,2002,school_enrollment_primary_percent,100.0,%,synthetic
+Spain,2002,water_access_percent,100.0,%,synthetic
+Spain,2003,gdp_per_capita_usd,10483.67,USD,synthetic
+Spain,2003,life_expectancy_years,95.15,years,synthetic
+Spain,2003,school_enrollment_primary_percent,100.0,%,synthetic
+Spain,2003,water_access_percent,100.0,%,synthetic
+Spain,2004,gdp_per_capita_usd,10804.91,USD,synthetic
+Spain,2004,life_expectancy_years,106.1,years,synthetic
+Spain,2004,school_enrollment_primary_percent,100.0,%,synthetic
+Spain,2004,water_access_percent,100.0,%,synthetic
+Spain,2005,gdp_per_capita_usd,11058.92,USD,synthetic
+Spain,2005,life_expectancy_years,115.72,years,synthetic
+Spain,2005,school_enrollment_primary_percent,100.0,%,synthetic
+Spain,2005,water_access_percent,100.0,%,synthetic
+Spain,2006,gdp_per_capita_usd,11430.37,USD,synthetic
+Spain,2006,life_expectancy_years,128.0,years,synthetic
+Spain,2006,school_enrollment_primary_percent,100.0,%,synthetic
+Spain,2006,water_access_percent,100.0,%,synthetic
+Spain,2007,gdp_per_capita_usd,11726.41,USD,synthetic
+Spain,2007,life_expectancy_years,140.45,years,synthetic
+Spain,2007,school_enrollment_primary_percent,100.0,%,synthetic
+Spain,2007,water_access_percent,100.0,%,synthetic
+Spain,2008,gdp_per_capita_usd,12090.34,USD,synthetic
+Spain,2008,life_expectancy_years,154.32,years,synthetic
+Spain,2008,school_enrollment_primary_percent,100.0,%,synthetic
+Spain,2008,water_access_percent,100.0,%,synthetic
+Spain,2009,gdp_per_capita_usd,12552.77,USD,synthetic
+Spain,2009,life_expectancy_years,169.12,years,synthetic
+Spain,2009,school_enrollment_primary_percent,100.0,%,synthetic
+Spain,2009,water_access_percent,100.0,%,synthetic
+Spain,2010,gdp_per_capita_usd,12885.53,USD,synthetic
+Spain,2010,life_expectancy_years,187.11,years,synthetic
+Spain,2010,school_enrollment_primary_percent,100.0,%,synthetic
+Spain,2010,water_access_percent,100.0,%,synthetic
+Spain,2011,gdp_per_capita_usd,13352.15,USD,synthetic
+Spain,2011,life_expectancy_years,205.66,years,synthetic
+Spain,2011,school_enrollment_primary_percent,100.0,%,synthetic
+Spain,2011,water_access_percent,100.0,%,synthetic
+Spain,2012,gdp_per_capita_usd,13770.22,USD,synthetic
+Spain,2012,life_expectancy_years,226.21,years,synthetic
+Spain,2012,school_enrollment_primary_percent,100.0,%,synthetic
+Spain,2012,water_access_percent,100.0,%,synthetic
+Spain,2013,gdp_per_capita_usd,14162.45,USD,synthetic
+Spain,2013,life_expectancy_years,248.94,years,synthetic
+Spain,2013,school_enrollment_primary_percent,100.0,%,synthetic
+Spain,2013,water_access_percent,100.0,%,synthetic
+Spain,2014,gdp_per_capita_usd,14593.3,USD,synthetic
+Spain,2014,life_expectancy_years,273.3,years,synthetic
+Spain,2014,school_enrollment_primary_percent,100.0,%,synthetic
+Spain,2014,water_access_percent,100.0,%,synthetic
+Spain,2015,gdp_per_capita_usd,14894.51,USD,synthetic
+Spain,2015,life_expectancy_years,300.43,years,synthetic
+Spain,2015,school_enrollment_primary_percent,100.0,%,synthetic
+Spain,2015,water_access_percent,100.0,%,synthetic
+Spain,2016,gdp_per_capita_usd,15392.49,USD,synthetic
+Spain,2016,life_expectancy_years,330.77,years,synthetic
+Spain,2016,school_enrollment_primary_percent,100.0,%,synthetic
+Spain,2016,water_access_percent,100.0,%,synthetic
+Spain,2017,gdp_per_capita_usd,15898.53,USD,synthetic
+Spain,2017,life_expectancy_years,363.85,years,synthetic
+Spain,2017,school_enrollment_primary_percent,100.0,%,synthetic
+Spain,2017,water_access_percent,100.0,%,synthetic
+Spain,2018,gdp_per_capita_usd,16312.42,USD,synthetic
+Spain,2018,life_expectancy_years,400.12,years,synthetic
+Spain,2018,school_enrollment_primary_percent,100.0,%,synthetic
+Spain,2018,water_access_percent,100.0,%,synthetic
+Spain,2019,gdp_per_capita_usd,16875.8,USD,synthetic
+Spain,2019,life_expectancy_years,440.06,years,synthetic
+Spain,2019,school_enrollment_primary_percent,100.0,%,synthetic
+Spain,2019,water_access_percent,100.0,%,synthetic
+Spain,2020,gdp_per_capita_usd,17345.84,USD,synthetic
+Spain,2020,life_expectancy_years,484.06,years,synthetic
+Spain,2020,school_enrollment_primary_percent,100.0,%,synthetic
+Spain,2020,water_access_percent,100.0,%,synthetic
+United States,2000,gdp_per_capita_usd,8001.79,USD,synthetic
+United States,2000,life_expectancy_years,59.95,years,synthetic
+United States,2000,school_enrollment_primary_percent,69.74,%,synthetic
+United States,2000,water_access_percent,59.86,%,synthetic
+United States,2001,gdp_per_capita_usd,8192.51,USD,synthetic
+United States,2001,life_expectancy_years,65.52,years,synthetic
+United States,2001,school_enrollment_primary_percent,83.81,%,synthetic
+United States,2001,water_access_percent,78.14,%,synthetic
+United States,2002,gdp_per_capita_usd,8491.99,USD,synthetic
+United States,2002,life_expectancy_years,72.35,years,synthetic
+United States,2002,school_enrollment_primary_percent,100.0,%,synthetic
+United States,2002,water_access_percent,100.0,%,synthetic
+United States,2003,gdp_per_capita_usd,8676.41,USD,synthetic
+United States,2003,life_expectancy_years,79.36,years,synthetic
+United States,2003,school_enrollment_primary_percent,100.0,%,synthetic
+United States,2003,water_access_percent,100.0,%,synthetic
+United States,2004,gdp_per_capita_usd,9065.59,USD,synthetic
+United States,2004,life_expectancy_years,87.42,years,synthetic
+United States,2004,school_enrollment_primary_percent,100.0,%,synthetic
+United States,2004,water_access_percent,100.0,%,synthetic
+United States,2005,gdp_per_capita_usd,9291.82,USD,synthetic
+United States,2005,life_expectancy_years,96.72,years,synthetic
+United States,2005,school_enrollment_primary_percent,100.0,%,synthetic
+United States,2005,water_access_percent,100.0,%,synthetic
+United States,2006,gdp_per_capita_usd,9608.37,USD,synthetic
+United States,2006,life_expectancy_years,106.75,years,synthetic
+United States,2006,school_enrollment_primary_percent,100.0,%,synthetic
+United States,2006,water_access_percent,100.0,%,synthetic
+United States,2007,gdp_per_capita_usd,9873.06,USD,synthetic
+United States,2007,life_expectancy_years,116.61,years,synthetic
+United States,2007,school_enrollment_primary_percent,100.0,%,synthetic
+United States,2007,water_access_percent,100.0,%,synthetic
+United States,2008,gdp_per_capita_usd,10098.85,USD,synthetic
+United States,2008,life_expectancy_years,129.17,years,synthetic
+United States,2008,school_enrollment_primary_percent,100.0,%,synthetic
+United States,2008,water_access_percent,100.0,%,synthetic
+United States,2009,gdp_per_capita_usd,10419.39,USD,synthetic
+United States,2009,life_expectancy_years,141.1,years,synthetic
+United States,2009,school_enrollment_primary_percent,100.0,%,synthetic
+United States,2009,water_access_percent,100.0,%,synthetic
+United States,2010,gdp_per_capita_usd,10697.89,USD,synthetic
+United States,2010,life_expectancy_years,155.18,years,synthetic
+United States,2010,school_enrollment_primary_percent,100.0,%,synthetic
+United States,2010,water_access_percent,100.0,%,synthetic
+United States,2011,gdp_per_capita_usd,11097.9,USD,synthetic
+United States,2011,life_expectancy_years,171.05,years,synthetic
+United States,2011,school_enrollment_primary_percent,100.0,%,synthetic
+United States,2011,water_access_percent,100.0,%,synthetic
+United States,2012,gdp_per_capita_usd,11365.28,USD,synthetic
+United States,2012,life_expectancy_years,188.45,years,synthetic
+United States,2012,school_enrollment_primary_percent,100.0,%,synthetic
+United States,2012,water_access_percent,100.0,%,synthetic
+United States,2013,gdp_per_capita_usd,11749.3,USD,synthetic
+United States,2013,life_expectancy_years,206.69,years,synthetic
+United States,2013,school_enrollment_primary_percent,100.0,%,synthetic
+United States,2013,water_access_percent,100.0,%,synthetic
+United States,2014,gdp_per_capita_usd,12034.36,USD,synthetic
+United States,2014,life_expectancy_years,227.4,years,synthetic
+United States,2014,school_enrollment_primary_percent,100.0,%,synthetic
+United States,2014,water_access_percent,100.0,%,synthetic
+United States,2015,gdp_per_capita_usd,12392.37,USD,synthetic
+United States,2015,life_expectancy_years,250.38,years,synthetic
+United States,2015,school_enrollment_primary_percent,100.0,%,synthetic
+United States,2015,water_access_percent,100.0,%,synthetic
+United States,2016,gdp_per_capita_usd,12791.59,USD,synthetic
+United States,2016,life_expectancy_years,275.13,years,synthetic
+United States,2016,school_enrollment_primary_percent,100.0,%,synthetic
+United States,2016,water_access_percent,100.0,%,synthetic
+United States,2017,gdp_per_capita_usd,13184.99,USD,synthetic
+United States,2017,life_expectancy_years,302.68,years,synthetic
+United States,2017,school_enrollment_primary_percent,100.0,%,synthetic
+United States,2017,water_access_percent,100.0,%,synthetic
+United States,2018,gdp_per_capita_usd,13577.99,USD,synthetic
+United States,2018,life_expectancy_years,333.1,years,synthetic
+United States,2018,school_enrollment_primary_percent,100.0,%,synthetic
+United States,2018,water_access_percent,100.0,%,synthetic
+United States,2019,gdp_per_capita_usd,13986.13,USD,synthetic
+United States,2019,life_expectancy_years,367.47,years,synthetic
+United States,2019,school_enrollment_primary_percent,100.0,%,synthetic
+United States,2019,water_access_percent,100.0,%,synthetic
+United States,2020,gdp_per_capita_usd,14443.31,USD,synthetic
+United States,2020,life_expectancy_years,403.23,years,synthetic
+United States,2020,school_enrollment_primary_percent,100.0,%,synthetic
+United States,2020,water_access_percent,100.0,%,synthetic
+Canada,2000,gdp_per_capita_usd,8435.68,USD,synthetic
+Canada,2000,life_expectancy_years,62.84,years,synthetic
+Canada,2000,school_enrollment_primary_percent,74.01,%,synthetic
+Canada,2000,water_access_percent,62.77,%,synthetic
+Canada,2001,gdp_per_capita_usd,8623.84,USD,synthetic
+Canada,2001,life_expectancy_years,69.81,years,synthetic
+Canada,2001,school_enrollment_primary_percent,87.66,%,synthetic
+Canada,2001,water_access_percent,82.0,%,synthetic
+Canada,2002,gdp_per_capita_usd,8886.56,USD,synthetic
+Canada,2002,life_expectancy_years,75.77,years,synthetic
+Canada,2002,school_enrollment_primary_percent,100.0,%,synthetic
+Canada,2002,water_access_percent,100.0,%,synthetic
+Canada,2003,gdp_per_capita_usd,9219.81,USD,synthetic
+Canada,2003,life_expectancy_years,83.74,years,synthetic
+Canada,2003,school_enrollment_primary_percent,100.0,%,synthetic
+Canada,2003,water_access_percent,100.0,%,synthetic
+Canada,2004,gdp_per_capita_usd,9405.88,USD,synthetic
+Canada,2004,life_expectancy_years,92.79,years,synthetic
+Canada,2004,school_enrollment_primary_percent,100.0,%,synthetic
+Canada,2004,water_access_percent,100.0,%,synthetic
+Canada,2005,gdp_per_capita_usd,9734.01,USD,synthetic
+Canada,2005,life_expectancy_years,101.39,years,synthetic
+Canada,2005,school_enrollment_primary_percent,100.0,%,synthetic
+Canada,2005,water_access_percent,100.0,%,synthetic
+Canada,2006,gdp_per_capita_usd,10038.32,USD,synthetic
+Canada,2006,life_expectancy_years,111.04,years,synthetic
+Canada,2006,school_enrollment_primary_percent,100.0,%,synthetic
+Canada,2006,water_access_percent,100.0,%,synthetic
+Canada,2007,gdp_per_capita_usd,10348.47,USD,synthetic
+Canada,2007,life_expectancy_years,122.97,years,synthetic
+Canada,2007,school_enrollment_primary_percent,100.0,%,synthetic
+Canada,2007,water_access_percent,100.0,%,synthetic
+Canada,2008,gdp_per_capita_usd,10588.73,USD,synthetic
+Canada,2008,life_expectancy_years,135.61,years,synthetic
+Canada,2008,school_enrollment_primary_percent,100.0,%,synthetic
+Canada,2008,water_access_percent,100.0,%,synthetic
+Canada,2009,gdp_per_capita_usd,10968.53,USD,synthetic
+Canada,2009,life_expectancy_years,148.22,years,synthetic
+Canada,2009,school_enrollment_primary_percent,100.0,%,synthetic
+Canada,2009,water_access_percent,100.0,%,synthetic
+Canada,2010,gdp_per_capita_usd,11287.59,USD,synthetic
+Canada,2010,life_expectancy_years,162.82,years,synthetic
+Canada,2010,school_enrollment_primary_percent,100.0,%,synthetic
+Canada,2010,water_access_percent,100.0,%,synthetic
+Canada,2011,gdp_per_capita_usd,11638.63,USD,synthetic
+Canada,2011,life_expectancy_years,179.96,years,synthetic
+Canada,2011,school_enrollment_primary_percent,100.0,%,synthetic
+Canada,2011,water_access_percent,100.0,%,synthetic
+Canada,2012,gdp_per_capita_usd,12053.41,USD,synthetic
+Canada,2012,life_expectancy_years,198.02,years,synthetic
+Canada,2012,school_enrollment_primary_percent,100.0,%,synthetic
+Canada,2012,water_access_percent,100.0,%,synthetic
+Canada,2013,gdp_per_capita_usd,12283.43,USD,synthetic
+Canada,2013,life_expectancy_years,217.45,years,synthetic
+Canada,2013,school_enrollment_primary_percent,100.0,%,synthetic
+Canada,2013,water_access_percent,100.0,%,synthetic
+Canada,2014,gdp_per_capita_usd,12626.45,USD,synthetic
+Canada,2014,life_expectancy_years,238.74,years,synthetic
+Canada,2014,school_enrollment_primary_percent,100.0,%,synthetic
+Canada,2014,water_access_percent,100.0,%,synthetic
+Canada,2015,gdp_per_capita_usd,13086.41,USD,synthetic
+Canada,2015,life_expectancy_years,263.03,years,synthetic
+Canada,2015,school_enrollment_primary_percent,100.0,%,synthetic
+Canada,2015,water_access_percent,100.0,%,synthetic
+Canada,2016,gdp_per_capita_usd,13495.89,USD,synthetic
+Canada,2016,life_expectancy_years,289.83,years,synthetic
+Canada,2016,school_enrollment_primary_percent,100.0,%,synthetic
+Canada,2016,water_access_percent,100.0,%,synthetic
+Canada,2017,gdp_per_capita_usd,13959.15,USD,synthetic
+Canada,2017,life_expectancy_years,318.4,years,synthetic
+Canada,2017,school_enrollment_primary_percent,100.0,%,synthetic
+Canada,2017,water_access_percent,100.0,%,synthetic
+Canada,2018,gdp_per_capita_usd,14315.49,USD,synthetic
+Canada,2018,life_expectancy_years,350.18,years,synthetic
+Canada,2018,school_enrollment_primary_percent,100.0,%,synthetic
+Canada,2018,water_access_percent,100.0,%,synthetic
+Canada,2019,gdp_per_capita_usd,14741.66,USD,synthetic
+Canada,2019,life_expectancy_years,384.88,years,synthetic
+Canada,2019,school_enrollment_primary_percent,100.0,%,synthetic
+Canada,2019,water_access_percent,100.0,%,synthetic
+Canada,2020,gdp_per_capita_usd,15151.85,USD,synthetic
+Canada,2020,life_expectancy_years,424.12,years,synthetic
+Canada,2020,school_enrollment_primary_percent,100.0,%,synthetic
+Canada,2020,water_access_percent,100.0,%,synthetic
+Brazil,2000,gdp_per_capita_usd,8869.09,USD,synthetic
+Brazil,2000,life_expectancy_years,65.57,years,synthetic
+Brazil,2000,school_enrollment_primary_percent,77.34,%,synthetic
+Brazil,2000,water_access_percent,65.78,%,synthetic
+Brazil,2001,gdp_per_capita_usd,9016.06,USD,synthetic
+Brazil,2001,life_expectancy_years,72.48,years,synthetic
+Brazil,2001,school_enrollment_primary_percent,92.76,%,synthetic
+Brazil,2001,water_access_percent,86.2,%,synthetic
+Brazil,2002,gdp_per_capita_usd,9274.71,USD,synthetic
+Brazil,2002,life_expectancy_years,79.57,years,synthetic
+Brazil,2002,school_enrollment_primary_percent,100.0,%,synthetic
+Brazil,2002,water_access_percent,100.0,%,synthetic
+Brazil,2003,gdp_per_capita_usd,9615.06,USD,synthetic
+Brazil,2003,life_expectancy_years,88.14,years,synthetic
+Brazil,2003,school_enrollment_primary_percent,100.0,%,synthetic
+Brazil,2003,water_access_percent,100.0,%,synthetic
+Brazil,2004,gdp_per_capita_usd,9875.67,USD,synthetic
+Brazil,2004,life_expectancy_years,96.6,years,synthetic
+Brazil,2004,school_enrollment_primary_percent,100.0,%,synthetic
+Brazil,2004,water_access_percent,100.0,%,synthetic
+Brazil,2005,gdp_per_capita_usd,10193.47,USD,synthetic
+Brazil,2005,life_expectancy_years,105.77,years,synthetic
+Brazil,2005,school_enrollment_primary_percent,100.0,%,synthetic
+Brazil,2005,water_access_percent,100.0,%,synthetic
+Brazil,2006,gdp_per_capita_usd,10455.31,USD,synthetic
+Brazil,2006,life_expectancy_years,116.29,years,synthetic
+Brazil,2006,school_enrollment_primary_percent,100.0,%,synthetic
+Brazil,2006,water_access_percent,100.0,%,synthetic
+Brazil,2007,gdp_per_capita_usd,10870.4,USD,synthetic
+Brazil,2007,life_expectancy_years,128.32,years,synthetic
+Brazil,2007,school_enrollment_primary_percent,100.0,%,synthetic
+Brazil,2007,water_access_percent,100.0,%,synthetic
+Brazil,2008,gdp_per_capita_usd,11191.98,USD,synthetic
+Brazil,2008,life_expectancy_years,141.09,years,synthetic
+Brazil,2008,school_enrollment_primary_percent,100.0,%,synthetic
+Brazil,2008,water_access_percent,100.0,%,synthetic
+Brazil,2009,gdp_per_capita_usd,11411.54,USD,synthetic
+Brazil,2009,life_expectancy_years,156.28,years,synthetic
+Brazil,2009,school_enrollment_primary_percent,100.0,%,synthetic
+Brazil,2009,water_access_percent,100.0,%,synthetic
+Brazil,2010,gdp_per_capita_usd,11884.89,USD,synthetic
+Brazil,2010,life_expectancy_years,171.54,years,synthetic
+Brazil,2010,school_enrollment_primary_percent,100.0,%,synthetic
+Brazil,2010,water_access_percent,100.0,%,synthetic
+Brazil,2011,gdp_per_capita_usd,12222.88,USD,synthetic
+Brazil,2011,life_expectancy_years,187.67,years,synthetic
+Brazil,2011,school_enrollment_primary_percent,100.0,%,synthetic
+Brazil,2011,water_access_percent,100.0,%,synthetic
+Brazil,2012,gdp_per_capita_usd,12545.16,USD,synthetic
+Brazil,2012,life_expectancy_years,207.08,years,synthetic
+Brazil,2012,school_enrollment_primary_percent,100.0,%,synthetic
+Brazil,2012,water_access_percent,100.0,%,synthetic
+Brazil,2013,gdp_per_capita_usd,13006.29,USD,synthetic
+Brazil,2013,life_expectancy_years,228.03,years,synthetic
+Brazil,2013,school_enrollment_primary_percent,100.0,%,synthetic
+Brazil,2013,water_access_percent,100.0,%,synthetic
+Brazil,2014,gdp_per_capita_usd,13256.01,USD,synthetic
+Brazil,2014,life_expectancy_years,250.16,years,synthetic
+Brazil,2014,school_enrollment_primary_percent,100.0,%,synthetic
+Brazil,2014,water_access_percent,100.0,%,synthetic
+Brazil,2015,gdp_per_capita_usd,13623.44,USD,synthetic
+Brazil,2015,life_expectancy_years,275.41,years,synthetic
+Brazil,2015,school_enrollment_primary_percent,100.0,%,synthetic
+Brazil,2015,water_access_percent,100.0,%,synthetic
+Brazil,2016,gdp_per_capita_usd,14099.58,USD,synthetic
+Brazil,2016,life_expectancy_years,302.88,years,synthetic
+Brazil,2016,school_enrollment_primary_percent,100.0,%,synthetic
+Brazil,2016,water_access_percent,100.0,%,synthetic
+Brazil,2017,gdp_per_capita_usd,14575.26,USD,synthetic
+Brazil,2017,life_expectancy_years,333.47,years,synthetic
+Brazil,2017,school_enrollment_primary_percent,100.0,%,synthetic
+Brazil,2017,water_access_percent,100.0,%,synthetic
+Brazil,2018,gdp_per_capita_usd,14965.2,USD,synthetic
+Brazil,2018,life_expectancy_years,366.48,years,synthetic
+Brazil,2018,school_enrollment_primary_percent,100.0,%,synthetic
+Brazil,2018,water_access_percent,100.0,%,synthetic
+Brazil,2019,gdp_per_capita_usd,15367.76,USD,synthetic
+Brazil,2019,life_expectancy_years,403.44,years,synthetic
+Brazil,2019,school_enrollment_primary_percent,100.0,%,synthetic
+Brazil,2019,water_access_percent,100.0,%,synthetic
+Brazil,2020,gdp_per_capita_usd,15914.33,USD,synthetic
+Brazil,2020,life_expectancy_years,443.56,years,synthetic
+Brazil,2020,school_enrollment_primary_percent,100.0,%,synthetic
+Brazil,2020,water_access_percent,100.0,%,synthetic
+Mexico,2000,gdp_per_capita_usd,9268.28,USD,synthetic
+Mexico,2000,life_expectancy_years,69.68,years,synthetic
+Mexico,2000,school_enrollment_primary_percent,81.29,%,synthetic
+Mexico,2000,water_access_percent,69.53,%,synthetic
+Mexico,2001,gdp_per_capita_usd,9464.74,USD,synthetic
+Mexico,2001,life_expectancy_years,75.46,years,synthetic
+Mexico,2001,school_enrollment_primary_percent,96.34,%,synthetic
+Mexico,2001,water_access_percent,89.79,%,synthetic
+Mexico,2002,gdp_per_capita_usd,9801.27,USD,synthetic
+Mexico,2002,life_expectancy_years,82.97,years,synthetic
+Mexico,2002,school_enrollment_primary_percent,100.0,%,synthetic
+Mexico,2002,water_access_percent,100.0,%,synthetic
+Mexico,2003,gdp_per_capita_usd,10048.25,USD,synthetic
+Mexico,2003,life_expectancy_years,91.79,years,synthetic
+Mexico,2003,school_enrollment_primary_percent,100.0,%,synthetic
+Mexico,2003,water_access_percent,100.0,%,synthetic
+Mexico,2004,gdp_per_capita_usd,10330.4,USD,synthetic
+Mexico,2004,life_expectancy_years,101.7,years,synthetic
+Mexico,2004,school_enrollment_primary_percent,100.0,%,synthetic
+Mexico,2004,water_access_percent,100.0,%,synthetic
+Mexico,2005,gdp_per_capita_usd,10718.95,USD,synthetic
+Mexico,2005,life_expectancy_years,111.28,years,synthetic
+Mexico,2005,school_enrollment_primary_percent,100.0,%,synthetic
+Mexico,2005,water_access_percent,100.0,%,synthetic
+Mexico,2006,gdp_per_capita_usd,10986.84,USD,synthetic
+Mexico,2006,life_expectancy_years,122.08,years,synthetic
+Mexico,2006,school_enrollment_primary_percent,100.0,%,synthetic
+Mexico,2006,water_access_percent,100.0,%,synthetic
+Mexico,2007,gdp_per_capita_usd,11236.7,USD,synthetic
+Mexico,2007,life_expectancy_years,133.86,years,synthetic
+Mexico,2007,school_enrollment_primary_percent,100.0,%,synthetic
+Mexico,2007,water_access_percent,100.0,%,synthetic
+Mexico,2008,gdp_per_capita_usd,11564.76,USD,synthetic
+Mexico,2008,life_expectancy_years,147.74,years,synthetic
+Mexico,2008,school_enrollment_primary_percent,100.0,%,synthetic
+Mexico,2008,water_access_percent,100.0,%,synthetic
+Mexico,2009,gdp_per_capita_usd,12089.98,USD,synthetic
+Mexico,2009,life_expectancy_years,162.09,years,synthetic
+Mexico,2009,school_enrollment_primary_percent,100.0,%,synthetic
+Mexico,2009,water_access_percent,100.0,%,synthetic
+Mexico,2010,gdp_per_capita_usd,12412.62,USD,synthetic
+Mexico,2010,life_expectancy_years,178.82,years,synthetic
+Mexico,2010,school_enrollment_primary_percent,100.0,%,synthetic
+Mexico,2010,water_access_percent,100.0,%,synthetic
+Mexico,2011,gdp_per_capita_usd,12785.35,USD,synthetic
+Mexico,2011,life_expectancy_years,196.39,years,synthetic
+Mexico,2011,school_enrollment_primary_percent,100.0,%,synthetic
+Mexico,2011,water_access_percent,100.0,%,synthetic
+Mexico,2012,gdp_per_capita_usd,13068.23,USD,synthetic
+Mexico,2012,life_expectancy_years,216.46,years,synthetic
+Mexico,2012,school_enrollment_primary_percent,100.0,%,synthetic
+Mexico,2012,water_access_percent,100.0,%,synthetic
+Mexico,2013,gdp_per_capita_usd,13537.14,USD,synthetic
+Mexico,2013,life_expectancy_years,237.89,years,synthetic
+Mexico,2013,school_enrollment_primary_percent,100.0,%,synthetic
+Mexico,2013,water_access_percent,100.0,%,synthetic
+Mexico,2014,gdp_per_capita_usd,13969.72,USD,synthetic
+Mexico,2014,life_expectancy_years,262.69,years,synthetic
+Mexico,2014,school_enrollment_primary_percent,100.0,%,synthetic
+Mexico,2014,water_access_percent,100.0,%,synthetic
+Mexico,2015,gdp_per_capita_usd,14295.07,USD,synthetic
+Mexico,2015,life_expectancy_years,288.45,years,synthetic
+Mexico,2015,school_enrollment_primary_percent,100.0,%,synthetic
+Mexico,2015,water_access_percent,100.0,%,synthetic
+Mexico,2016,gdp_per_capita_usd,14784.12,USD,synthetic
+Mexico,2016,life_expectancy_years,316.87,years,synthetic
+Mexico,2016,school_enrollment_primary_percent,100.0,%,synthetic
+Mexico,2016,water_access_percent,100.0,%,synthetic
+Mexico,2017,gdp_per_capita_usd,15175.41,USD,synthetic
+Mexico,2017,life_expectancy_years,348.43,years,synthetic
+Mexico,2017,school_enrollment_primary_percent,100.0,%,synthetic
+Mexico,2017,water_access_percent,100.0,%,synthetic
+Mexico,2018,gdp_per_capita_usd,15712.22,USD,synthetic
+Mexico,2018,life_expectancy_years,383.73,years,synthetic
+Mexico,2018,school_enrollment_primary_percent,100.0,%,synthetic
+Mexico,2018,water_access_percent,100.0,%,synthetic
+Mexico,2019,gdp_per_capita_usd,16184.58,USD,synthetic
+Mexico,2019,life_expectancy_years,422.28,years,synthetic
+Mexico,2019,school_enrollment_primary_percent,100.0,%,synthetic
+Mexico,2019,water_access_percent,100.0,%,synthetic
+Mexico,2020,gdp_per_capita_usd,16548.8,USD,synthetic
+Mexico,2020,life_expectancy_years,463.86,years,synthetic
+Mexico,2020,school_enrollment_primary_percent,100.0,%,synthetic
+Mexico,2020,water_access_percent,100.0,%,synthetic
+Argentina,2000,gdp_per_capita_usd,9565.14,USD,synthetic
+Argentina,2000,life_expectancy_years,71.41,years,synthetic
+Argentina,2000,school_enrollment_primary_percent,83.33,%,synthetic
+Argentina,2000,water_access_percent,72.57,%,synthetic
+Argentina,2001,gdp_per_capita_usd,9851.79,USD,synthetic
+Argentina,2001,life_expectancy_years,79.82,years,synthetic
+Argentina,2001,school_enrollment_primary_percent,100.0,%,synthetic
+Argentina,2001,water_access_percent,93.98,%,synthetic
+Argentina,2002,gdp_per_capita_usd,10273.25,USD,synthetic
+Argentina,2002,life_expectancy_years,86.77,years,synthetic
+Argentina,2002,school_enrollment_primary_percent,100.0,%,synthetic
+Argentina,2002,water_access_percent,100.0,%,synthetic
+Argentina,2003,gdp_per_capita_usd,10580.48,USD,synthetic
+Argentina,2003,life_expectancy_years,95.79,years,synthetic
+Argentina,2003,school_enrollment_primary_percent,100.0,%,synthetic
+Argentina,2003,water_access_percent,100.0,%,synthetic
+Argentina,2004,gdp_per_capita_usd,10824.08,USD,synthetic
+Argentina,2004,life_expectancy_years,104.94,years,synthetic
+Argentina,2004,school_enrollment_primary_percent,100.0,%,synthetic
+Argentina,2004,water_access_percent,100.0,%,synthetic
+Argentina,2005,gdp_per_capita_usd,11093.89,USD,synthetic
+Argentina,2005,life_expectancy_years,115.29,years,synthetic
+Argentina,2005,school_enrollment_primary_percent,100.0,%,synthetic
+Argentina,2005,water_access_percent,100.0,%,synthetic
+Argentina,2006,gdp_per_capita_usd,11389.43,USD,synthetic
+Argentina,2006,life_expectancy_years,127.03,years,synthetic
+Argentina,2006,school_enrollment_primary_percent,100.0,%,synthetic
+Argentina,2006,water_access_percent,100.0,%,synthetic
+Argentina,2007,gdp_per_capita_usd,11721.41,USD,synthetic
+Argentina,2007,life_expectancy_years,140.07,years,synthetic
+Argentina,2007,school_enrollment_primary_percent,100.0,%,synthetic
+Argentina,2007,water_access_percent,100.0,%,synthetic
+Argentina,2008,gdp_per_capita_usd,12165.97,USD,synthetic
+Argentina,2008,life_expectancy_years,153.83,years,synthetic
+Argentina,2008,school_enrollment_primary_percent,100.0,%,synthetic
+Argentina,2008,water_access_percent,100.0,%,synthetic
+Argentina,2009,gdp_per_capita_usd,12594.58,USD,synthetic
+Argentina,2009,life_expectancy_years,169.49,years,synthetic
+Argentina,2009,school_enrollment_primary_percent,100.0,%,synthetic
+Argentina,2009,water_access_percent,100.0,%,synthetic
+Argentina,2010,gdp_per_capita_usd,12920.9,USD,synthetic
+Argentina,2010,life_expectancy_years,186.04,years,synthetic
+Argentina,2010,school_enrollment_primary_percent,100.0,%,synthetic
+Argentina,2010,water_access_percent,100.0,%,synthetic
+Argentina,2011,gdp_per_capita_usd,13261.86,USD,synthetic
+Argentina,2011,life_expectancy_years,205.75,years,synthetic
+Argentina,2011,school_enrollment_primary_percent,100.0,%,synthetic
+Argentina,2011,water_access_percent,100.0,%,synthetic
+Argentina,2012,gdp_per_capita_usd,13608.86,USD,synthetic
+Argentina,2012,life_expectancy_years,226.11,years,synthetic
+Argentina,2012,school_enrollment_primary_percent,100.0,%,synthetic
+Argentina,2012,water_access_percent,100.0,%,synthetic
+Argentina,2013,gdp_per_capita_usd,14154.17,USD,synthetic
+Argentina,2013,life_expectancy_years,249.27,years,synthetic
+Argentina,2013,school_enrollment_primary_percent,100.0,%,synthetic
+Argentina,2013,water_access_percent,100.0,%,synthetic
+Argentina,2014,gdp_per_capita_usd,14445.68,USD,synthetic
+Argentina,2014,life_expectancy_years,273.34,years,synthetic
+Argentina,2014,school_enrollment_primary_percent,100.0,%,synthetic
+Argentina,2014,water_access_percent,100.0,%,synthetic
+Argentina,2015,gdp_per_capita_usd,14998.07,USD,synthetic
+Argentina,2015,life_expectancy_years,301.02,years,synthetic
+Argentina,2015,school_enrollment_primary_percent,100.0,%,synthetic
+Argentina,2015,water_access_percent,100.0,%,synthetic
+Argentina,2016,gdp_per_capita_usd,15465.4,USD,synthetic
+Argentina,2016,life_expectancy_years,330.85,years,synthetic
+Argentina,2016,school_enrollment_primary_percent,100.0,%,synthetic
+Argentina,2016,water_access_percent,100.0,%,synthetic
+Argentina,2017,gdp_per_capita_usd,15785.76,USD,synthetic
+Argentina,2017,life_expectancy_years,363.83,years,synthetic
+Argentina,2017,school_enrollment_primary_percent,100.0,%,synthetic
+Argentina,2017,water_access_percent,100.0,%,synthetic
+Argentina,2018,gdp_per_capita_usd,16386.25,USD,synthetic
+Argentina,2018,life_expectancy_years,400.81,years,synthetic
+Argentina,2018,school_enrollment_primary_percent,100.0,%,synthetic
+Argentina,2018,water_access_percent,100.0,%,synthetic
+Argentina,2019,gdp_per_capita_usd,16920.95,USD,synthetic
+Argentina,2019,life_expectancy_years,440.21,years,synthetic
+Argentina,2019,school_enrollment_primary_percent,100.0,%,synthetic
+Argentina,2019,water_access_percent,100.0,%,synthetic
+Argentina,2020,gdp_per_capita_usd,17258.09,USD,synthetic
+Argentina,2020,life_expectancy_years,484.14,years,synthetic
+Argentina,2020,school_enrollment_primary_percent,100.0,%,synthetic
+Argentina,2020,water_access_percent,100.0,%,synthetic
+China,2000,gdp_per_capita_usd,8026.75,USD,synthetic
+China,2000,life_expectancy_years,60.59,years,synthetic
+China,2000,school_enrollment_primary_percent,70.67,%,synthetic
+China,2000,water_access_percent,59.68,%,synthetic
+China,2001,gdp_per_capita_usd,8226.92,USD,synthetic
+China,2001,life_expectancy_years,65.82,years,synthetic
+China,2001,school_enrollment_primary_percent,83.48,%,synthetic
+China,2001,water_access_percent,78.0,%,synthetic
+China,2002,gdp_per_capita_usd,8430.7,USD,synthetic
+China,2002,life_expectancy_years,73.0,years,synthetic
+China,2002,school_enrollment_primary_percent,100.0,%,synthetic
+China,2002,water_access_percent,100.0,%,synthetic
+China,2003,gdp_per_capita_usd,8762.27,USD,synthetic
+China,2003,life_expectancy_years,80.28,years,synthetic
+China,2003,school_enrollment_primary_percent,100.0,%,synthetic
+China,2003,water_access_percent,100.0,%,synthetic
+China,2004,gdp_per_capita_usd,8930.04,USD,synthetic
+China,2004,life_expectancy_years,87.53,years,synthetic
+China,2004,school_enrollment_primary_percent,100.0,%,synthetic
+China,2004,water_access_percent,100.0,%,synthetic
+China,2005,gdp_per_capita_usd,9261.68,USD,synthetic
+China,2005,life_expectancy_years,97.18,years,synthetic
+China,2005,school_enrollment_primary_percent,100.0,%,synthetic
+China,2005,water_access_percent,100.0,%,synthetic
+China,2006,gdp_per_capita_usd,9508.45,USD,synthetic
+China,2006,life_expectancy_years,106.85,years,synthetic
+China,2006,school_enrollment_primary_percent,100.0,%,synthetic
+China,2006,water_access_percent,100.0,%,synthetic
+China,2007,gdp_per_capita_usd,9893.69,USD,synthetic
+China,2007,life_expectancy_years,117.35,years,synthetic
+China,2007,school_enrollment_primary_percent,100.0,%,synthetic
+China,2007,water_access_percent,100.0,%,synthetic
+China,2008,gdp_per_capita_usd,10056.63,USD,synthetic
+China,2008,life_expectancy_years,128.18,years,synthetic
+China,2008,school_enrollment_primary_percent,100.0,%,synthetic
+China,2008,water_access_percent,100.0,%,synthetic
+China,2009,gdp_per_capita_usd,10497.7,USD,synthetic
+China,2009,life_expectancy_years,141.75,years,synthetic
+China,2009,school_enrollment_primary_percent,100.0,%,synthetic
+China,2009,water_access_percent,100.0,%,synthetic
+China,2010,gdp_per_capita_usd,10751.01,USD,synthetic
+China,2010,life_expectancy_years,156.04,years,synthetic
+China,2010,school_enrollment_primary_percent,100.0,%,synthetic
+China,2010,water_access_percent,100.0,%,synthetic
+China,2011,gdp_per_capita_usd,11000.26,USD,synthetic
+China,2011,life_expectancy_years,170.78,years,synthetic
+China,2011,school_enrollment_primary_percent,100.0,%,synthetic
+China,2011,water_access_percent,100.0,%,synthetic
+China,2012,gdp_per_capita_usd,11432.86,USD,synthetic
+China,2012,life_expectancy_years,188.9,years,synthetic
+China,2012,school_enrollment_primary_percent,100.0,%,synthetic
+China,2012,water_access_percent,100.0,%,synthetic
+China,2013,gdp_per_capita_usd,11812.41,USD,synthetic
+China,2013,life_expectancy_years,207.09,years,synthetic
+China,2013,school_enrollment_primary_percent,100.0,%,synthetic
+China,2013,water_access_percent,100.0,%,synthetic
+China,2014,gdp_per_capita_usd,12077.56,USD,synthetic
+China,2014,life_expectancy_years,227.86,years,synthetic
+China,2014,school_enrollment_primary_percent,100.0,%,synthetic
+China,2014,water_access_percent,100.0,%,synthetic
+China,2015,gdp_per_capita_usd,12413.29,USD,synthetic
+China,2015,life_expectancy_years,251.12,years,synthetic
+China,2015,school_enrollment_primary_percent,100.0,%,synthetic
+China,2015,water_access_percent,100.0,%,synthetic
+China,2016,gdp_per_capita_usd,12809.4,USD,synthetic
+China,2016,life_expectancy_years,275.49,years,synthetic
+China,2016,school_enrollment_primary_percent,100.0,%,synthetic
+China,2016,water_access_percent,100.0,%,synthetic
+China,2017,gdp_per_capita_usd,13241.97,USD,synthetic
+China,2017,life_expectancy_years,303.69,years,synthetic
+China,2017,school_enrollment_primary_percent,100.0,%,synthetic
+China,2017,water_access_percent,100.0,%,synthetic
+China,2018,gdp_per_capita_usd,13659.18,USD,synthetic
+China,2018,life_expectancy_years,333.9,years,synthetic
+China,2018,school_enrollment_primary_percent,100.0,%,synthetic
+China,2018,water_access_percent,100.0,%,synthetic
+China,2019,gdp_per_capita_usd,14094.92,USD,synthetic
+China,2019,life_expectancy_years,366.71,years,synthetic
+China,2019,school_enrollment_primary_percent,100.0,%,synthetic
+China,2019,water_access_percent,100.0,%,synthetic
+China,2020,gdp_per_capita_usd,14444.07,USD,synthetic
+China,2020,life_expectancy_years,403.72,years,synthetic
+China,2020,school_enrollment_primary_percent,100.0,%,synthetic
+China,2020,water_access_percent,100.0,%,synthetic
+India,2000,gdp_per_capita_usd,8476.94,USD,synthetic
+India,2000,life_expectancy_years,63.09,years,synthetic
+India,2000,school_enrollment_primary_percent,74.05,%,synthetic
+India,2000,water_access_percent,63.51,%,synthetic
+India,2001,gdp_per_capita_usd,8734.33,USD,synthetic
+India,2001,life_expectancy_years,69.65,years,synthetic
+India,2001,school_enrollment_primary_percent,88.83,%,synthetic
+India,2001,water_access_percent,82.49,%,synthetic
+India,2002,gdp_per_capita_usd,8897.3,USD,synthetic
+India,2002,life_expectancy_years,75.63,years,synthetic
+India,2002,school_enrollment_primary_percent,100.0,%,synthetic
+India,2002,water_access_percent,100.0,%,synthetic
+India,2003,gdp_per_capita_usd,9214.84,USD,synthetic
+India,2003,life_expectancy_years,84.02,years,synthetic
+India,2003,school_enrollment_primary_percent,100.0,%,synthetic
+India,2003,water_access_percent,100.0,%,synthetic
+India,2004,gdp_per_capita_usd,9439.64,USD,synthetic
+India,2004,life_expectancy_years,92.55,years,synthetic
+India,2004,school_enrollment_primary_percent,100.0,%,synthetic
+India,2004,water_access_percent,100.0,%,synthetic
+India,2005,gdp_per_capita_usd,9758.11,USD,synthetic
+India,2005,life_expectancy_years,101.99,years,synthetic
+India,2005,school_enrollment_primary_percent,100.0,%,synthetic
+India,2005,water_access_percent,100.0,%,synthetic
+India,2006,gdp_per_capita_usd,10073.44,USD,synthetic
+India,2006,life_expectancy_years,112.05,years,synthetic
+India,2006,school_enrollment_primary_percent,100.0,%,synthetic
+India,2006,water_access_percent,100.0,%,synthetic
+India,2007,gdp_per_capita_usd,10257.69,USD,synthetic
+India,2007,life_expectancy_years,122.32,years,synthetic
+India,2007,school_enrollment_primary_percent,100.0,%,synthetic
+India,2007,water_access_percent,100.0,%,synthetic
+India,2008,gdp_per_capita_usd,10662.91,USD,synthetic
+India,2008,life_expectancy_years,134.93,years,synthetic
+India,2008,school_enrollment_primary_percent,100.0,%,synthetic
+India,2008,water_access_percent,100.0,%,synthetic
+India,2009,gdp_per_capita_usd,11008.04,USD,synthetic
+India,2009,life_expectancy_years,148.43,years,synthetic
+India,2009,school_enrollment_primary_percent,100.0,%,synthetic
+India,2009,water_access_percent,100.0,%,synthetic
+India,2010,gdp_per_capita_usd,11352.89,USD,synthetic
+India,2010,life_expectancy_years,163.92,years,synthetic
+India,2010,school_enrollment_primary_percent,100.0,%,synthetic
+India,2010,water_access_percent,100.0,%,synthetic
+India,2011,gdp_per_capita_usd,11642.43,USD,synthetic
+India,2011,life_expectancy_years,180.31,years,synthetic
+India,2011,school_enrollment_primary_percent,100.0,%,synthetic
+India,2011,water_access_percent,100.0,%,synthetic
+India,2012,gdp_per_capita_usd,11991.32,USD,synthetic
+India,2012,life_expectancy_years,197.45,years,synthetic
+India,2012,school_enrollment_primary_percent,100.0,%,synthetic
+India,2012,water_access_percent,100.0,%,synthetic
+India,2013,gdp_per_capita_usd,12273.4,USD,synthetic
+India,2013,life_expectancy_years,216.94,years,synthetic
+India,2013,school_enrollment_primary_percent,100.0,%,synthetic
+India,2013,water_access_percent,100.0,%,synthetic
+India,2014,gdp_per_capita_usd,12744.35,USD,synthetic
+India,2014,life_expectancy_years,239.15,years,synthetic
+India,2014,school_enrollment_primary_percent,100.0,%,synthetic
+India,2014,water_access_percent,100.0,%,synthetic
+India,2015,gdp_per_capita_usd,13063.06,USD,synthetic
+India,2015,life_expectancy_years,263.06,years,synthetic
+India,2015,school_enrollment_primary_percent,100.0,%,synthetic
+India,2015,water_access_percent,100.0,%,synthetic
+India,2016,gdp_per_capita_usd,13523.03,USD,synthetic
+India,2016,life_expectancy_years,289.9,years,synthetic
+India,2016,school_enrollment_primary_percent,100.0,%,synthetic
+India,2016,water_access_percent,100.0,%,synthetic
+India,2017,gdp_per_capita_usd,13965.92,USD,synthetic
+India,2017,life_expectancy_years,318.13,years,synthetic
+India,2017,school_enrollment_primary_percent,100.0,%,synthetic
+India,2017,water_access_percent,100.0,%,synthetic
+India,2018,gdp_per_capita_usd,14259.3,USD,synthetic
+India,2018,life_expectancy_years,349.78,years,synthetic
+India,2018,school_enrollment_primary_percent,100.0,%,synthetic
+India,2018,water_access_percent,100.0,%,synthetic
+India,2019,gdp_per_capita_usd,14786.8,USD,synthetic
+India,2019,life_expectancy_years,385.54,years,synthetic
+India,2019,school_enrollment_primary_percent,100.0,%,synthetic
+India,2019,water_access_percent,100.0,%,synthetic
+India,2020,gdp_per_capita_usd,15138.53,USD,synthetic
+India,2020,life_expectancy_years,424.26,years,synthetic
+India,2020,school_enrollment_primary_percent,100.0,%,synthetic
+India,2020,water_access_percent,100.0,%,synthetic
+Japan,2000,gdp_per_capita_usd,8871.32,USD,synthetic
+Japan,2000,life_expectancy_years,66.06,years,synthetic
+Japan,2000,school_enrollment_primary_percent,77.03,%,synthetic
+Japan,2000,water_access_percent,66.11,%,synthetic
+Japan,2001,gdp_per_capita_usd,9123.12,USD,synthetic
+Japan,2001,life_expectancy_years,71.97,years,synthetic
+Japan,2001,school_enrollment_primary_percent,91.81,%,synthetic
+Japan,2001,water_access_percent,85.91,%,synthetic
+Japan,2002,gdp_per_capita_usd,9396.03,USD,synthetic
+Japan,2002,life_expectancy_years,80.36,years,synthetic
+Japan,2002,school_enrollment_primary_percent,100.0,%,synthetic
+Japan,2002,water_access_percent,100.0,%,synthetic
+Japan,2003,gdp_per_capita_usd,9570.12,USD,synthetic
+Japan,2003,life_expectancy_years,87.39,years,synthetic
+Japan,2003,school_enrollment_primary_percent,100.0,%,synthetic
+Japan,2003,water_access_percent,100.0,%,synthetic
+Japan,2004,gdp_per_capita_usd,9899.49,USD,synthetic
+Japan,2004,life_expectancy_years,97.12,years,synthetic
+Japan,2004,school_enrollment_primary_percent,100.0,%,synthetic
+Japan,2004,water_access_percent,100.0,%,synthetic
+Japan,2005,gdp_per_capita_usd,10266.61,USD,synthetic
+Japan,2005,life_expectancy_years,105.99,years,synthetic
+Japan,2005,school_enrollment_primary_percent,100.0,%,synthetic
+Japan,2005,water_access_percent,100.0,%,synthetic
+Japan,2006,gdp_per_capita_usd,10585.42,USD,synthetic
+Japan,2006,life_expectancy_years,117.42,years,synthetic
+Japan,2006,school_enrollment_primary_percent,100.0,%,synthetic
+Japan,2006,water_access_percent,100.0,%,synthetic
+Japan,2007,gdp_per_capita_usd,10880.74,USD,synthetic
+Japan,2007,life_expectancy_years,128.79,years,synthetic
+Japan,2007,school_enrollment_primary_percent,100.0,%,synthetic
+Japan,2007,water_access_percent,100.0,%,synthetic
+Japan,2008,gdp_per_capita_usd,11095.52,USD,synthetic
+Japan,2008,life_expectancy_years,141.89,years,synthetic
+Japan,2008,school_enrollment_primary_percent,100.0,%,synthetic
+Japan,2008,water_access_percent,100.0,%,synthetic
+Japan,2009,gdp_per_capita_usd,11465.76,USD,synthetic
+Japan,2009,life_expectancy_years,155.06,years,synthetic
+Japan,2009,school_enrollment_primary_percent,100.0,%,synthetic
+Japan,2009,water_access_percent,100.0,%,synthetic
+Japan,2010,gdp_per_capita_usd,11779.08,USD,synthetic
+Japan,2010,life_expectancy_years,171.03,years,synthetic
+Japan,2010,school_enrollment_primary_percent,100.0,%,synthetic
+Japan,2010,water_access_percent,100.0,%,synthetic
+Japan,2011,gdp_per_capita_usd,12141.49,USD,synthetic
+Japan,2011,life_expectancy_years,188.28,years,synthetic
+Japan,2011,school_enrollment_primary_percent,100.0,%,synthetic
+Japan,2011,water_access_percent,100.0,%,synthetic
+Japan,2012,gdp_per_capita_usd,12533.62,USD,synthetic
+Japan,2012,life_expectancy_years,206.59,years,synthetic
+Japan,2012,school_enrollment_primary_percent,100.0,%,synthetic
+Japan,2012,water_access_percent,100.0,%,synthetic
+Japan,2013,gdp_per_capita_usd,12877.89,USD,synthetic
+Japan,2013,life_expectancy_years,227.79,years,synthetic
+Japan,2013,school_enrollment_primary_percent,100.0,%,synthetic
+Japan,2013,water_access_percent,100.0,%,synthetic
+Japan,2014,gdp_per_capita_usd,13316.04,USD,synthetic
+Japan,2014,life_expectancy_years,250.24,years,synthetic
+Japan,2014,school_enrollment_primary_percent,100.0,%,synthetic
+Japan,2014,water_access_percent,100.0,%,synthetic
+Japan,2015,gdp_per_capita_usd,13645.43,USD,synthetic
+Japan,2015,life_expectancy_years,276.05,years,synthetic
+Japan,2015,school_enrollment_primary_percent,100.0,%,synthetic
+Japan,2015,water_access_percent,100.0,%,synthetic
+Japan,2016,gdp_per_capita_usd,14065.78,USD,synthetic
+Japan,2016,life_expectancy_years,303.58,years,synthetic
+Japan,2016,school_enrollment_primary_percent,100.0,%,synthetic
+Japan,2016,water_access_percent,100.0,%,synthetic
+Japan,2017,gdp_per_capita_usd,14573.28,USD,synthetic
+Japan,2017,life_expectancy_years,333.38,years,synthetic
+Japan,2017,school_enrollment_primary_percent,100.0,%,synthetic
+Japan,2017,water_access_percent,100.0,%,synthetic
+Japan,2018,gdp_per_capita_usd,15012.32,USD,synthetic
+Japan,2018,life_expectancy_years,367.43,years,synthetic
+Japan,2018,school_enrollment_primary_percent,100.0,%,synthetic
+Japan,2018,water_access_percent,100.0,%,synthetic
+Japan,2019,gdp_per_capita_usd,15473.83,USD,synthetic
+Japan,2019,life_expectancy_years,403.65,years,synthetic
+Japan,2019,school_enrollment_primary_percent,100.0,%,synthetic
+Japan,2019,water_access_percent,100.0,%,synthetic
+Japan,2020,gdp_per_capita_usd,15822.11,USD,synthetic
+Japan,2020,life_expectancy_years,444.62,years,synthetic
+Japan,2020,school_enrollment_primary_percent,100.0,%,synthetic
+Japan,2020,water_access_percent,100.0,%,synthetic
+South Korea,2000,gdp_per_capita_usd,9127.55,USD,synthetic
+South Korea,2000,life_expectancy_years,68.35,years,synthetic
+South Korea,2000,school_enrollment_primary_percent,80.12,%,synthetic
+South Korea,2000,water_access_percent,69.5,%,synthetic
+South Korea,2001,gdp_per_capita_usd,9561.63,USD,synthetic
+South Korea,2001,life_expectancy_years,76.12,years,synthetic
+South Korea,2001,school_enrollment_primary_percent,96.08,%,synthetic
+South Korea,2001,water_access_percent,90.2,%,synthetic
+South Korea,2002,gdp_per_capita_usd,9742.44,USD,synthetic
+South Korea,2002,life_expectancy_years,83.71,years,synthetic
+South Korea,2002,school_enrollment_primary_percent,100.0,%,synthetic
+South Korea,2002,water_access_percent,100.0,%,synthetic
+South Korea,2003,gdp_per_capita_usd,9964.14,USD,synthetic
+South Korea,2003,life_expectancy_years,91.74,years,synthetic
+South Korea,2003,school_enrollment_primary_percent,100.0,%,synthetic
+South Korea,2003,water_access_percent,100.0,%,synthetic
+South Korea,2004,gdp_per_capita_usd,10433.8,USD,synthetic
+South Korea,2004,life_expectancy_years,100.39,years,synthetic
+South Korea,2004,school_enrollment_primary_percent,100.0,%,synthetic
+South Korea,2004,water_access_percent,100.0,%,synthetic
+South Korea,2005,gdp_per_capita_usd,10604.19,USD,synthetic
+South Korea,2005,life_expectancy_years,111.18,years,synthetic
+South Korea,2005,school_enrollment_primary_percent,100.0,%,synthetic
+South Korea,2005,water_access_percent,100.0,%,synthetic
+South Korea,2006,gdp_per_capita_usd,10909.92,USD,synthetic
+South Korea,2006,life_expectancy_years,121.95,years,synthetic
+South Korea,2006,school_enrollment_primary_percent,100.0,%,synthetic
+South Korea,2006,water_access_percent,100.0,%,synthetic
+South Korea,2007,gdp_per_capita_usd,11325.82,USD,synthetic
+South Korea,2007,life_expectancy_years,134.67,years,synthetic
+South Korea,2007,school_enrollment_primary_percent,100.0,%,synthetic
+South Korea,2007,water_access_percent,100.0,%,synthetic
+South Korea,2008,gdp_per_capita_usd,11724.12,USD,synthetic
+South Korea,2008,life_expectancy_years,147.66,years,synthetic
+South Korea,2008,school_enrollment_primary_percent,100.0,%,synthetic
+South Korea,2008,water_access_percent,100.0,%,synthetic
+South Korea,2009,gdp_per_capita_usd,11979.84,USD,synthetic
+South Korea,2009,life_expectancy_years,163.21,years,synthetic
+South Korea,2009,school_enrollment_primary_percent,100.0,%,synthetic
+South Korea,2009,water_access_percent,100.0,%,synthetic
+South Korea,2010,gdp_per_capita_usd,12440.61,USD,synthetic
+South Korea,2010,life_expectancy_years,178.53,years,synthetic
+South Korea,2010,school_enrollment_primary_percent,100.0,%,synthetic
+South Korea,2010,water_access_percent,100.0,%,synthetic
+South Korea,2011,gdp_per_capita_usd,12676.52,USD,synthetic
+South Korea,2011,life_expectancy_years,196.62,years,synthetic
+South Korea,2011,school_enrollment_primary_percent,100.0,%,synthetic
+South Korea,2011,water_access_percent,100.0,%,synthetic
+South Korea,2012,gdp_per_capita_usd,13130.6,USD,synthetic
+South Korea,2012,life_expectancy_years,216.73,years,synthetic
+South Korea,2012,school_enrollment_primary_percent,100.0,%,synthetic
+South Korea,2012,water_access_percent,100.0,%,synthetic
+South Korea,2013,gdp_per_capita_usd,13511.12,USD,synthetic
+South Korea,2013,life_expectancy_years,238.28,years,synthetic
+South Korea,2013,school_enrollment_primary_percent,100.0,%,synthetic
+South Korea,2013,water_access_percent,100.0,%,synthetic
+South Korea,2014,gdp_per_capita_usd,13973.47,USD,synthetic
+South Korea,2014,life_expectancy_years,261.77,years,synthetic
+South Korea,2014,school_enrollment_primary_percent,100.0,%,synthetic
+South Korea,2014,water_access_percent,100.0,%,synthetic
+South Korea,2015,gdp_per_capita_usd,14415.62,USD,synthetic
+South Korea,2015,life_expectancy_years,288.71,years,synthetic
+South Korea,2015,school_enrollment_primary_percent,100.0,%,synthetic
+South Korea,2015,water_access_percent,100.0,%,synthetic
+South Korea,2016,gdp_per_capita_usd,14691.7,USD,synthetic
+South Korea,2016,life_expectancy_years,317.43,years,synthetic
+South Korea,2016,school_enrollment_primary_percent,100.0,%,synthetic
+South Korea,2016,water_access_percent,100.0,%,synthetic
+South Korea,2017,gdp_per_capita_usd,15272.53,USD,synthetic
+South Korea,2017,life_expectancy_years,349.16,years,synthetic
+South Korea,2017,school_enrollment_primary_percent,100.0,%,synthetic
+South Korea,2017,water_access_percent,100.0,%,synthetic
+South Korea,2018,gdp_per_capita_usd,15685.64,USD,synthetic
+South Korea,2018,life_expectancy_years,383.22,years,synthetic
+South Korea,2018,school_enrollment_primary_percent,100.0,%,synthetic
+South Korea,2018,water_access_percent,100.0,%,synthetic
+South Korea,2019,gdp_per_capita_usd,16157.57,USD,synthetic
+South Korea,2019,life_expectancy_years,422.16,years,synthetic
+South Korea,2019,school_enrollment_primary_percent,100.0,%,synthetic
+South Korea,2019,water_access_percent,100.0,%,synthetic
+South Korea,2020,gdp_per_capita_usd,16700.38,USD,synthetic
+South Korea,2020,life_expectancy_years,464.4,years,synthetic
+South Korea,2020,school_enrollment_primary_percent,100.0,%,synthetic
+South Korea,2020,water_access_percent,100.0,%,synthetic
+South Africa,2000,gdp_per_capita_usd,9575.59,USD,synthetic
+South Africa,2000,life_expectancy_years,71.73,years,synthetic
+South Africa,2000,school_enrollment_primary_percent,83.91,%,synthetic
+South Africa,2000,water_access_percent,71.84,%,synthetic
+South Africa,2001,gdp_per_capita_usd,9837.63,USD,synthetic
+South Africa,2001,life_expectancy_years,79.14,years,synthetic
+South Africa,2001,school_enrollment_primary_percent,100.0,%,synthetic
+South Africa,2001,water_access_percent,93.64,%,synthetic
+South Africa,2002,gdp_per_capita_usd,10253.21,USD,synthetic
+South Africa,2002,life_expectancy_years,86.82,years,synthetic
+South Africa,2002,school_enrollment_primary_percent,100.0,%,synthetic
+South Africa,2002,water_access_percent,100.0,%,synthetic
+South Africa,2003,gdp_per_capita_usd,10531.7,USD,synthetic
+South Africa,2003,life_expectancy_years,95.83,years,synthetic
+South Africa,2003,school_enrollment_primary_percent,100.0,%,synthetic
+South Africa,2003,water_access_percent,100.0,%,synthetic
+South Africa,2004,gdp_per_capita_usd,10716.8,USD,synthetic
+South Africa,2004,life_expectancy_years,106.1,years,synthetic
+South Africa,2004,school_enrollment_primary_percent,100.0,%,synthetic
+South Africa,2004,water_access_percent,100.0,%,synthetic
+South Africa,2005,gdp_per_capita_usd,11136.97,USD,synthetic
+South Africa,2005,life_expectancy_years,115.5,years,synthetic
+South Africa,2005,school_enrollment_primary_percent,100.0,%,synthetic
+South Africa,2005,water_access_percent,100.0,%,synthetic
+South Africa,2006,gdp_per_capita_usd,11403.92,USD,synthetic
+South Africa,2006,life_expectancy_years,127.24,years,synthetic
+South Africa,2006,school_enrollment_primary_percent,100.0,%,synthetic
+South Africa,2006,water_access_percent,100.0,%,synthetic
+South Africa,2007,gdp_per_capita_usd,11760.89,USD,synthetic
+South Africa,2007,life_expectancy_years,139.74,years,synthetic
+South Africa,2007,school_enrollment_primary_percent,100.0,%,synthetic
+South Africa,2007,water_access_percent,100.0,%,synthetic
+South Africa,2008,gdp_per_capita_usd,12188.08,USD,synthetic
+South Africa,2008,life_expectancy_years,155.03,years,synthetic
+South Africa,2008,school_enrollment_primary_percent,100.0,%,synthetic
+South Africa,2008,water_access_percent,100.0,%,synthetic
+South Africa,2009,gdp_per_capita_usd,12516.39,USD,synthetic
+South Africa,2009,life_expectancy_years,169.73,years,synthetic
+South Africa,2009,school_enrollment_primary_percent,100.0,%,synthetic
+South Africa,2009,water_access_percent,100.0,%,synthetic
+South Africa,2010,gdp_per_capita_usd,12816.4,USD,synthetic
+South Africa,2010,life_expectancy_years,186.87,years,synthetic
+South Africa,2010,school_enrollment_primary_percent,100.0,%,synthetic
+South Africa,2010,water_access_percent,100.0,%,synthetic
+South Africa,2011,gdp_per_capita_usd,13356.78,USD,synthetic
+South Africa,2011,life_expectancy_years,205.82,years,synthetic
+South Africa,2011,school_enrollment_primary_percent,100.0,%,synthetic
+South Africa,2011,water_access_percent,100.0,%,synthetic
+South Africa,2012,gdp_per_capita_usd,13655.05,USD,synthetic
+South Africa,2012,life_expectancy_years,226.01,years,synthetic
+South Africa,2012,school_enrollment_primary_percent,100.0,%,synthetic
+South Africa,2012,water_access_percent,100.0,%,synthetic
+South Africa,2013,gdp_per_capita_usd,14003.64,USD,synthetic
+South Africa,2013,life_expectancy_years,248.18,years,synthetic
+South Africa,2013,school_enrollment_primary_percent,100.0,%,synthetic
+South Africa,2013,water_access_percent,100.0,%,synthetic
+South Africa,2014,gdp_per_capita_usd,14553.11,USD,synthetic
+South Africa,2014,life_expectancy_years,273.05,years,synthetic
+South Africa,2014,school_enrollment_primary_percent,100.0,%,synthetic
+South Africa,2014,water_access_percent,100.0,%,synthetic
+South Africa,2015,gdp_per_capita_usd,14921.51,USD,synthetic
+South Africa,2015,life_expectancy_years,300.75,years,synthetic
+South Africa,2015,school_enrollment_primary_percent,100.0,%,synthetic
+South Africa,2015,water_access_percent,100.0,%,synthetic
+South Africa,2016,gdp_per_capita_usd,15424.02,USD,synthetic
+South Africa,2016,life_expectancy_years,331.05,years,synthetic
+South Africa,2016,school_enrollment_primary_percent,100.0,%,synthetic
+South Africa,2016,water_access_percent,100.0,%,synthetic
+South Africa,2017,gdp_per_capita_usd,15863.22,USD,synthetic
+South Africa,2017,life_expectancy_years,363.92,years,synthetic
+South Africa,2017,school_enrollment_primary_percent,100.0,%,synthetic
+South Africa,2017,water_access_percent,100.0,%,synthetic
+South Africa,2018,gdp_per_capita_usd,16303.93,USD,synthetic
+South Africa,2018,life_expectancy_years,400.9,years,synthetic
+South Africa,2018,school_enrollment_primary_percent,100.0,%,synthetic
+South Africa,2018,water_access_percent,100.0,%,synthetic
+South Africa,2019,gdp_per_capita_usd,16868.65,USD,synthetic
+South Africa,2019,life_expectancy_years,439.82,years,synthetic
+South Africa,2019,school_enrollment_primary_percent,100.0,%,synthetic
+South Africa,2019,water_access_percent,100.0,%,synthetic
+South Africa,2020,gdp_per_capita_usd,17317.59,USD,synthetic
+South Africa,2020,life_expectancy_years,484.5,years,synthetic
+South Africa,2020,school_enrollment_primary_percent,100.0,%,synthetic
+South Africa,2020,water_access_percent,100.0,%,synthetic
