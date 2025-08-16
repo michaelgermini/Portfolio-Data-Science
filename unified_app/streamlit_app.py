@@ -706,9 +706,9 @@ elif page == "DL: Image Classification":
             st.caption(f"Detected classes: {', '.join(subdirs) if subdirs else 'none'}")
 
         if not list_classes(data_root):
-            st.info("Put images under `deep_learning/image_classification/data/` in subfolders per class (e.g., `cats/`, `dogs/`), or use the synthetic dataset generator in the sidebar.")
-            st.markdown("Notebook path: `deep_learning/image_classification/notebooks/image_classification.ipynb`")
-            st.stop()
+            # Auto-generate a tiny synthetic dataset and cache it on disk for future runs
+            generate_synthetic_dataset(data_root)
+            st.caption("No dataset found – generated a tiny synthetic dataset (classes: red, green, blue) and cached it under `deep_learning/image_classification/data/`.")
 
         # Controls
         colm1, colm2, colm3, colm4 = st.columns(4)
@@ -843,17 +843,132 @@ elif page == "DL: Chatbot NLP":
         st.header("Deep Learning – Chatbot NLP")
         st.caption("Intent classification + simple Q&A using LSTM/Transformers (e.g., DistilBERT).")
         st.markdown("Notebook path: `deep_learning/chatbot_nlp/notebooks/chatbot_nlp.ipynb`")
-        st.markdown("Run locally:")
-        st.code(
-            """
-            # in project root
-            .venv\\Scripts\\activate  # if you use the venv
-            jupyter lab deep_learning/chatbot_nlp/notebooks/chatbot_nlp.ipynb
-            """,
-            language="bash",
-        )
         st.markdown("Data: CSV/JSON with `text` and `intent` (and optional `answer`).")
-        st.markdown("KPIs: Precision/Recall/F1; demo: type a question and see top intent + answer.")
+
+        uploaded = st.file_uploader("Upload intents dataset (CSV with columns: text,intent[,answer])", type=["csv", "json"], key="chatbot_ds")
+        sample_path = Path("deep_learning/chatbot_nlp/data/intents_sample.csv")
+
+        @st.cache_data(show_spinner=False)
+        def load_or_generate_intents(path: Path) -> pd.DataFrame:
+            # If not present, synthesize a tiny dataset and persist it for future runs
+            if not path.exists():
+                path.parent.mkdir(parents=True, exist_ok=True)
+                df_syn = pd.DataFrame([
+                    {"text": "hi", "intent": "greeting", "answer": "Hello! How can I help you today?"},
+                    {"text": "hello", "intent": "greeting", "answer": "Hello! How can I help you today?"},
+                    {"text": "what are your opening hours?", "intent": "opening_hours", "answer": "We are open Monday to Friday, 9am–6pm."},
+                    {"text": "when do you open?", "intent": "opening_hours", "answer": "We are open Monday to Friday, 9am–6pm."},
+                    {"text": "track my order 12345", "intent": "order_status", "answer": "You can track your order in your account under Orders."},
+                    {"text": "where is my order?", "intent": "order_status", "answer": "You can track your order in your account under Orders."},
+                    {"text": "how do I get a refund?", "intent": "refund_policy", "answer": "You can request a refund within 30 days from your account page."},
+                    {"text": "i need support", "intent": "contact_support", "answer": "You can reach support at support@example.com or via the Help Center."},
+                    {"text": "how can i contact you?", "intent": "contact_support", "answer": "You can reach support at support@example.com or via the Help Center."},
+                    {"text": "bye", "intent": "goodbye", "answer": "Goodbye! Have a great day."},
+                ])
+                df_syn.to_csv(path, index=False)
+                return df_syn
+            return pd.read_csv(path)
+
+        if uploaded is None:
+            df = load_or_generate_intents(sample_path)
+            st.caption(f"Using cached sample: `{sample_path.as_posix()}`")
+            if sample_path.exists():
+                st.download_button("Download sample CSV", data=sample_path.read_bytes(), file_name="intents_sample.csv", mime="text/csv")
+        else:
+            try:
+                if uploaded.name.lower().endswith(".json"):
+                    df = pd.read_json(uploaded)
+                else:
+                    df = pd.read_csv(uploaded)
+            except Exception as e:
+                st.error(f"Failed to read dataset: {e}")
+                return
+
+        needed = {"text", "intent"}
+        if not needed.issubset(set(c.lower() for c in df.columns)):
+            st.error("Dataset must include columns `text` and `intent` (case-insensitive). Optional: `answer`.")
+            return
+        df.columns = [c.lower() for c in df.columns]
+        df = df.dropna(subset=["text", "intent"]).copy()
+        df["intent"] = df["intent"].astype(str).str.strip().str.lower()
+        intents = sorted(df["intent"].unique().tolist())
+        st.markdown(f"Detected intents: `{', '.join(intents)}`")
+
+        try:
+            import torch  # type: ignore
+            from transformers import AutoTokenizer, AutoModel  # type: ignore
+        except Exception:
+            st.warning("Transformers not available. Install dependencies to enable the live demo.")
+            return
+
+        @st.cache_resource(show_spinner=False)
+        def load_encoder():
+            tok = AutoTokenizer.from_pretrained("distilbert-base-uncased")
+            mdl = AutoModel.from_pretrained("distilbert-base-uncased")
+            mdl.eval()
+            return tok, mdl
+
+        tokenizer, encoder = load_encoder()
+
+        @st.cache_data(show_spinner=False)
+        def build_intent_centroids(rows: pd.DataFrame):
+            centroids = {}
+            with torch.no_grad():
+                for intent_name in intents:
+                    texts = rows.loc[rows.intent == intent_name, "text"].astype(str).tolist()
+                    if not texts:
+                        continue
+                    tokens = tokenizer(texts, padding=True, truncation=True, return_tensors="pt")
+                    outputs = encoder(**tokens)
+                    cls = outputs.last_hidden_state[:, 0, :]
+                    vec = torch.nn.functional.normalize(cls, dim=1).mean(dim=0)
+                    vec = torch.nn.functional.normalize(vec, dim=0)
+                    centroids[intent_name] = vec
+            return centroids
+
+        centroids = build_intent_centroids(df)
+        if not centroids:
+            st.info("No examples to compute intent centroids.")
+            return
+
+        user_text = st.text_input("Type a message", value="what are your opening hours?")
+        if user_text:
+            with torch.no_grad():
+                toks = tokenizer([user_text], padding=True, truncation=True, return_tensors="pt")
+                out = encoder(**toks)
+                emb = out.last_hidden_state[:, 0, :]
+                emb = torch.nn.functional.normalize(emb, dim=1)[0]
+                scores = []
+                for name, vec in centroids.items():
+                    sim = float(torch.dot(emb, vec))
+                    scores.append((name, sim))
+                scores.sort(key=lambda x: x[1], reverse=True)
+
+            names = [n for n, _ in scores]
+            sims = np.array([s for _, s in scores], dtype=float)
+            probs = np.exp(sims) / np.exp(sims).sum()
+            res_df = pd.DataFrame({"intent": names, "score": sims, "prob": probs})
+            st.dataframe(res_df.head(5), use_container_width=True)
+
+            top_intent = names[0]
+            answer = ""
+            if "answer" in df.columns:
+                ans_series = df.loc[df.intent == top_intent, "answer"].dropna()
+                if not ans_series.empty:
+                    answer = str(ans_series.iloc[0])
+            st.success(f"Predicted intent: {top_intent}")
+            if answer:
+                st.info(f"Answer: {answer}")
+
+        with st.expander("How to run the full notebook"):
+            st.code(
+                """
+                # in project root
+                .venv\\Scripts\\activate
+                jupyter lab deep_learning/chatbot_nlp/notebooks/chatbot_nlp.ipynb
+                """,
+                language="bash",
+            )
     render_dl_chatbot()
 elif page == "Storytelling notes":
     def render_story_notes() -> None:
