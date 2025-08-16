@@ -1,0 +1,162 @@
+country,year,indicator,value
+France,2000,gdp_per_capita_usd,28000
+France,2005,gdp_per_capita_usd,33000
+France,2010,gdp_per_capita_usd,40000
+France,2015,gdp_per_capita_usd,38000
+France,2020,gdp_per_capita_usd,39000
+Germany,2000,gdp_per_capita_usd,25000
+Germany,2005,gdp_per_capita_usd,32000
+Germany,2010,gdp_per_capita_usd,41000
+Germany,2015,gdp_per_capita_usd,41000
+Germany,2020,gdp_per_capita_usd,46000
+United States,2000,gdp_per_capita_usd,36000
+United States,2005,gdp_per_capita_usd,46000
+United States,2010,gdp_per_capita_usd,49000
+United States,2015,gdp_per_capita_usd,56000
+United States,2020,gdp_per_capita_usd,63500
+India,2000,gdp_per_capita_usd,450
+India,2005,gdp_per_capita_usd,730
+India,2010,gdp_per_capita_usd,1350
+India,2015,gdp_per_capita_usd,1600
+India,2020,gdp_per_capita_usd,1900
+Nigeria,2000,gdp_per_capita_usd,560
+Nigeria,2005,gdp_per_capita_usd,1100
+Nigeria,2010,gdp_per_capita_usd,2400
+Nigeria,2015,gdp_per_capita_usd,2200
+Nigeria,2020,gdp_per_capita_usd,2100
+Brazil,2000,gdp_per_capita_usd,3700
+Brazil,2005,gdp_per_capita_usd,6200
+Brazil,2010,gdp_per_capita_usd,11000
+Brazil,2015,gdp_per_capita_usd,8800
+Brazil,2020,gdp_per_capita_usd,6800
+France,2000,life_expectancy_years,79.0
+France,2005,life_expectancy_years,80.1
+France,2010,life_expectancy_years,82.0
+France,2015,life_expectancy_years,82.5
+France,2020,life_expectancy_years,82.6
+Germany,2000,life_expectancy_years,78.0
+Germany,2005,life_expectancy_years,79.2
+Germany,2010,life_expectancy_years,80.5
+Germany,2015,life_expectancy_years,81.0
+Germany,2020,life_expectancy_years,81.4
+United States,2000,life_expectancy_years,77.0
+United States,2005,life_expectancy_years,78.2
+United States,2010,life_expectancy_years,78.7
+United States,2015,life_expectancy_years,78.8
+United States,2020,life_expectancy_years,77.0
+India,2000,life_expectancy_years,62.0
+India,2005,life_expectancy_years,65.0
+India,2010,life_expectancy_years,67.5
+India,2015,life_expectancy_years,69.5
+India,2020,life_expectancy_years,70.0
+Nigeria,2000,life_expectancy_years,46.0
+Nigeria,2005,life_expectancy_years,48.0
+Nigeria,2010,life_expectancy_years,52.0
+Nigeria,2015,life_expectancy_years,54.5
+Nigeria,2020,life_expectancy_years,55.0
+Brazil,2000,life_expectancy_years,69.0
+Brazil,2005,life_expectancy_years,71.0
+Brazil,2010,life_expectancy_years,73.0
+Brazil,2015,life_expectancy_years,75.0
+Brazil,2020,life_expectancy_years,76.6
+France,2000,school_enrollment_primary_percent,99.5
+France,2005,school_enrollment_primary_percent,99.7
+France,2010,school_enrollment_primary_percent,99.8
+France,2015,school_enrollment_primary_percent,99.8
+France,2020,school_enrollment_primary_percent,99.9
+Germany,2000,school_enrollment_primary_percent,99.0
+Germany,2005,school_enrollment_primary_percent,99.3
+Germany,2010,school_enrollment_primary_percent,99.5
+Germany,2015,school_enrollment_primary_percent,99.6
+Germany,2020,school_enrollment_primary_percent,99.7
+United States,2000,school_enrollment_primary_percent,95.0
+United States,2005,school_enrollment_primary_percent,95.5
+United States,2010,school_enrollment_primary_percent,96.0
+United States,2015,school_enrollment_primary_percent,96.5
+United States,2020,school_enrollment_primary_percent,97.0
+India,2000,school_enrollment_primary_percent,90.0
+India,2005,school_enrollment_primary_percent,92.0
+India,2010,school_enrollment_primary_percent,94.0
+India,2015,school_enrollment_primary_percent,96.0
+India,2020,school_enrollment_primary_percent,97.0
+Nigeria,2000,school_enrollment_primary_percent,60.0
+Nigeria,2005,school_enrollment_primary_percent,63.0
+Nigeria,2010,school_enrollment_primary_percent,66.0
+Nigeria,2015,school_enrollment_primary_percent,68.0
+Nigeria,2020,school_enrollment_primary_percent,70.0
+Brazil,2000,school_enrollment_primary_percent,95.0
+Brazil,2005,school_enrollment_primary_percent,96.0
+Brazil,2010,school_enrollment_primary_percent,97.0
+Brazil,2015,school_enrollment_primary_percent,97.5
+Brazil,2020,school_enrollment_primary_percent,98.0
+France,2000,water_access_percent,99.0
+France,2005,water_access_percent,99.2
+France,2010,water_access_percent,99.4
+France,2015,water_access_percent,99.6
+France,2020,water_access_percent,99.7
+Germany,2000,water_access_percent,99.0
+Germany,2005,water_access_percent,99.2
+Germany,2010,water_access_percent,99.5
+Germany,2015,water_access_percent,99.6
+Germany,2020,water_access_percent,99.8
+United States,2000,water_access_percent,99.0
+United States,2005,water_access_percent,99.1
+United States,2010,water_access_percent,99.2
+United States,2015,water_access_percent,99.3
+United States,2020,water_access_percent,99.4
+India,2000,water_access_percent,80.0
+India,2005,water_access_percent,84.0
+India,2010,water_access_percent,88.0
+India,2015,water_access_percent,91.0
+India,2020,water_access_percent,93.0
+Nigeria,2000,water_access_percent,50.0
+Nigeria,2005,water_access_percent,55.0
+Nigeria,2010,water_access_percent,60.0
+Nigeria,2015,water_access_percent,65.0
+Nigeria,2020,water_access_percent,70.0
+Brazil,2000,water_access_percent,88.0
+Brazil,2005,water_access_percent,91.0
+Brazil,2010,water_access_percent,94.0
+Brazil,2015,water_access_percent,96.0
+Brazil,2020,water_access_percent,97.0
+China,2000,gdp_per_capita_usd,950
+China,2005,gdp_per_capita_usd,1750
+China,2010,gdp_per_capita_usd,4500
+China,2015,gdp_per_capita_usd,8000
+China,2020,gdp_per_capita_usd,10500
+China,2000,life_expectancy_years,71.4
+China,2005,life_expectancy_years,73.0
+China,2010,life_expectancy_years,75.2
+China,2015,life_expectancy_years,76.9
+China,2020,life_expectancy_years,78.0
+China,2000,school_enrollment_primary_percent,97.0
+China,2005,school_enrollment_primary_percent,98.0
+China,2010,school_enrollment_primary_percent,99.0
+China,2015,school_enrollment_primary_percent,99.5
+China,2020,school_enrollment_primary_percent,99.6
+China,2000,water_access_percent,88.0
+China,2005,water_access_percent,92.0
+China,2010,water_access_percent,95.0
+China,2015,water_access_percent,97.0
+China,2020,water_access_percent,98.0
+South Africa,2000,gdp_per_capita_usd,3500
+South Africa,2005,gdp_per_capita_usd,5500
+South Africa,2010,gdp_per_capita_usd,7500
+South Africa,2015,gdp_per_capita_usd,6000
+South Africa,2020,gdp_per_capita_usd,6000
+South Africa,2000,life_expectancy_years,57.0
+South Africa,2005,life_expectancy_years,53.0
+South Africa,2010,life_expectancy_years,57.0
+South Africa,2015,life_expectancy_years,63.0
+South Africa,2020,life_expectancy_years,65.0
+South Africa,2000,school_enrollment_primary_percent,88.0
+South Africa,2005,school_enrollment_primary_percent,90.0
+South Africa,2010,school_enrollment_primary_percent,92.0
+South Africa,2015,school_enrollment_primary_percent,94.0
+South Africa,2020,school_enrollment_primary_percent,96.0
+South Africa,2000,water_access_percent,80.0
+South Africa,2005,water_access_percent,84.0
+South Africa,2010,water_access_percent,86.0
+South Africa,2015,water_access_percent,88.0
+South Africa,2020,water_access_percent,90.0
+
