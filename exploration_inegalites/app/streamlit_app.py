@@ -5,6 +5,7 @@ import pandas as pd
 import streamlit as st
 import plotly.express as px
 import requests
+import numpy as np
 
 
 st.set_page_config(page_title="Global Inequalities – Country Comparator", layout="wide")
@@ -79,14 +80,52 @@ with st.sidebar:
 
 @st.cache_data(show_spinner=False)
 def load_local_sample() -> pd.DataFrame:
+    def ensure_large_sample_csv(target: Path) -> None:
+        if target.exists():
+            return
+        countries = [
+            "France","Germany","United Kingdom","Italy","Spain",
+            "United States","Canada","Japan","China","India",
+            "Brazil","South Africa","Nigeria","Russia","Australia"
+        ]
+        years = list(range(2000, 2021))
+        indicators = [
+            "gdp_per_capita_usd",
+            "life_expectancy_years",
+            "school_enrollment_primary_percent",
+            "water_access_percent",
+        ]
+        rows = []
+        rng = np.random.default_rng(42)
+        for c in countries:
+            base_gdp = rng.uniform(800, 60000)
+            gdp_growth = rng.uniform(0.5, 4.0) / 100.0
+            base_le = rng.uniform(55, 82)
+            le_growth = rng.uniform(0.05, 0.25)
+            base_enr = rng.uniform(60, 99)
+            enr_growth = rng.uniform(0.1, 0.5)
+            base_water = rng.uniform(50, 99)
+            water_growth = rng.uniform(0.2, 0.7)
+            for i, y in enumerate(years):
+                gdp = max(300, base_gdp * ((1.0 + gdp_growth) ** i))
+                le = min(90, base_le + le_growth * i)
+                enr = min(100, base_enr + enr_growth * i)
+                wat = min(100, base_water + water_growth * i)
+                rows.append([c, y, "gdp_per_capita_usd", float(round(gdp, 2))])
+                rows.append([c, y, "life_expectancy_years", float(round(le, 2))])
+                rows.append([c, y, "school_enrollment_primary_percent", float(round(enr, 2))])
+                rows.append([c, y, "water_access_percent", float(round(wat, 2))])
+        df_gen = pd.DataFrame(rows, columns=["country","year","indicator","value"])
+        target.parent.mkdir(parents=True, exist_ok=True)
+        df_gen.to_csv(target, index=False)
+
     try:
         sample_path = Path(__file__).resolve().parents[1] / "data" / "inegalites_sample.csv"
-        if sample_path.exists():
-            df_local = pd.read_csv(sample_path)
-            return pivot_long(df_local)
+        ensure_large_sample_csv(sample_path)
+        df_local = pd.read_csv(sample_path)
+        return pivot_long(df_local)
     except Exception:
-        pass
-    return pd.DataFrame()
+        return pd.DataFrame()
 
 
 df = pd.DataFrame()

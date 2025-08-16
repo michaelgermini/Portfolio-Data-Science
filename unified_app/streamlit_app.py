@@ -3,6 +3,17 @@ import streamlit as st
 import plotly.express as px
 import requests
 from pathlib import Path
+ 
+# ML/Preprocessing imports for House Prices page
+import numpy as np
+from sklearn.model_selection import KFold, cross_val_predict
+from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.impute import SimpleImputer
+from sklearn.linear_model import Ridge, Lasso
+from sklearn.ensemble import GradientBoostingRegressor
 
 
 st.set_page_config(page_title="Unified dashboards – Inequalities & Climate", layout="wide")
@@ -46,18 +57,54 @@ def render_inegalites() -> None:
     with st.sidebar:
         st.subheader("Data – Inequalities")
         uploaded = st.file_uploader("Upload a CSV (country, year, indicator, value)", type=["csv"], key="ineg_csv")
+        with st.expander("Load from opendata.swiss (CSV URL)"):
+            csv_url = st.text_input("CSV URL", key="ineg_csv_url")
+            load_click = st.button("Load URL", key="ineg_load_url")
+            if load_click and csv_url:
+                try:
+                    df_ext = pd.read_csv(csv_url)
+                    st.session_state["ineg_ext_df"] = df_ext
+                except Exception as e:
+                    st.error(f"Failed to load CSV from URL: {e}")
+            if "ineg_ext_df" in st.session_state:
+                df_ext = st.session_state["ineg_ext_df"]
+                st.caption("Map columns from the external CSV")
+                cols = df_ext.columns.tolist()
+                col_country = st.selectbox("Country column", cols, key="ineg_map_country")
+                col_year = st.selectbox("Year column", cols, key="ineg_map_year")
+                col_value = st.selectbox("Value column", cols, key="ineg_map_value")
+                indicator_name = st.text_input("Indicator name", value="external_indicator", key="ineg_map_indicator")
+                if st.button("Use this dataset", key="ineg_use_ext"):
+                    try:
+                        tmp = df_ext[[col_country, col_year, col_value]].copy()
+                        tmp.columns = ["country", "year", "value"]
+                        tmp["indicator"] = indicator_name
+                        # Coerce year
+                        tmp["year"] = pd.to_numeric(tmp["year"], errors="coerce").astype("Int64")
+                        st.session_state["ineg_final_df"] = tmp.dropna(subset=["year"])  # store tidy
+                        st.success("External dataset mapped. It will be used below.")
+                    except Exception as e:
+                        st.error(f"Mapping failed: {e}")
         indicator_choice = st.selectbox("Default indicator if no CSV is provided", ["GDP per capita (NY.GDP.PCAP.CD)", "None"], index=0, key="ineg_indic")
 
     @st.cache_data(show_spinner=False)
     def load_local_sample() -> pd.DataFrame:
         try:
             sample_path = Path(__file__).resolve().parents[1] / "exploration_inegalites" / "data" / "inegalites_sample.csv"
-            if sample_path.exists():
-                df_local = pd.read_csv(sample_path)
-                return pivot_long(df_local)
+            # If the inequalities app has not created it yet, try to generate a simple fallback here
+            if not sample_path.exists():
+                sample_path.parent.mkdir(parents=True, exist_ok=True)
+                df_tmp = pd.DataFrame({
+                    "country": ["France","Germany","United States","India"],
+                    "year": [2000,2000,2000,2000],
+                    "indicator": ["gdp_per_capita_usd"]*4,
+                    "value": [28000, 25000, 36000, 450]
+                })
+                df_tmp.to_csv(sample_path, index=False)
+            df_local = pd.read_csv(sample_path)
+            return pivot_long(df_local)
         except Exception:
-            pass
-        return pd.DataFrame()
+            return pd.DataFrame()
 
     df = pd.DataFrame()
     if uploaded is not None:
@@ -67,8 +114,12 @@ def render_inegalites() -> None:
         except Exception as e:
             st.error(f"Erreur lors de la lecture du CSV: {e}")
     else:
-        # 1) Essayer l'échantillon local
-        df = load_local_sample()
+        # 0) External mapped dataset if present
+        if "ineg_final_df" in st.session_state:
+            df = st.session_state["ineg_final_df"].copy()
+        # 1) Else try local sample
+        if df.empty:
+            df = load_local_sample()
         # 2) Sinon tenter la source distante par défaut
         if df.empty and indicator_choice.startswith("GDP"):
             df = fetch_worldbank_indicator("NY.GDP.PCAP.CD")
@@ -282,18 +333,127 @@ elif page == "ML: House Prices":
     def render_ml_house_prices() -> None:
         st.header("ML – House Prices (regression)")
         st.caption("Kaggle House Prices – ridge/lasso/GBR with preprocessing and cross‑validation.")
-        st.markdown("Notebook path: `ml_immo/notebooks/house_prices_modeling.ipynb`")
-        st.markdown("Run locally:")
-        st.code(
-            """
-            # in project root
-            .venv\\Scripts\\activate  # if you use the venv
-            jupyter lab ml_immo/notebooks/house_prices_modeling.ipynb
-            """,
-            language="bash",
+
+        with st.expander("About this page"):
+            st.markdown("- Upload Kaggle `train.csv` to generate CV metrics and visuals (predicted vs actual, residuals, feature importance).\n- Uses a robust preprocessing pipeline (impute, scale, one‑hot).\n- Models: Ridge (CV predictions) + Gradient Boosting (feature importances).")
+
+        uploaded_train = st.file_uploader("Upload Kaggle train.csv", type=["csv"], key="hp_train")
+        use_log = st.checkbox("Use log target (log1p(SalePrice))", value=True)
+
+        if uploaded_train is None:
+            st.info("Upload the Kaggle training file to see metrics and charts.")
+            st.markdown("Notebook: `ml_immo/notebooks/house_prices_modeling.ipynb`")
+            return
+
+        # Load data
+        try:
+            df = pd.read_csv(uploaded_train)
+        except Exception as e:
+            st.error(f"Could not read CSV: {e}")
+            return
+
+        if "SalePrice" not in df.columns:
+            st.error("Column `SalePrice` not found. Please upload the Kaggle training set.")
+            return
+
+        # Basic preprocessing schema
+        y = df["SalePrice"].astype(float)
+        X = df.drop(columns=["SalePrice"]).copy()
+        numeric_cols = X.select_dtypes(include=["int64", "float64"]).columns.tolist()
+        categorical_cols = X.select_dtypes(include=["object"]).columns.tolist()
+
+        preprocess = ColumnTransformer(
+            transformers=[
+                (
+                    "num",
+                    Pipeline([
+                        ("imputer", SimpleImputer(strategy="median")),
+                        ("scaler", StandardScaler()),
+                    ]),
+                    numeric_cols,
+                ),
+                (
+                    "cat",
+                    Pipeline([
+                        ("imputer", SimpleImputer(strategy="most_frequent")),
+                        ("oh", OneHotEncoder(handle_unknown="ignore")),
+                    ]),
+                    categorical_cols,
+                ),
+            ]
         )
+
+        # Cross-validated predictions with Ridge
+        ridge = Pipeline([
+            ("prep", preprocess),
+            ("model", Ridge(alpha=10.0)),
+        ])
+
+        cv = KFold(n_splits=5, shuffle=True, random_state=42)
+        y_target = np.log1p(y) if use_log else y.values
+        try:
+            y_pred_cv = cross_val_predict(ridge, X, y_target, cv=cv, n_jobs=-1)
+        except Exception as e:
+            st.error(f"Model failed during CV: {e}")
+            return
+
+        # Back-transform for metrics/plots if log used
+        if use_log:
+            y_pred_eval = np.expm1(y_pred_cv)
+            y_true_eval = y.values
+        else:
+            y_pred_eval = y_pred_cv
+            y_true_eval = y.values
+
+        rmse = float(np.sqrt(mean_squared_error(y_true_eval, y_pred_eval)))
+        r2 = float(r2_score(y_true_eval, y_pred_eval))
+
+        m1, m2 = st.columns(2)
+        m1.metric("RMSE (CV)", f"{rmse:,.0f}")
+        m2.metric("R² (CV)", f"{r2:.3f}")
+
+        # Predicted vs Actual scatter
+        df_scatter = pd.DataFrame({"Actual": y_true_eval, "Predicted": y_pred_eval})
+        fig_scatter = px.scatter(df_scatter, x="Actual", y="Predicted", title="Predicted vs Actual (Ridge, 5-fold CV)", opacity=0.6)
+        # Add y=x reference line
+        fig_scatter.add_shape(type="line", x0=df_scatter["Actual"].min(), y0=df_scatter["Actual"].min(),
+                              x1=df_scatter["Actual"].max(), y1=df_scatter["Actual"].max(), line=dict(color="red", dash="dash"))
+        st.plotly_chart(fig_scatter, use_container_width=True)
+
+        # Residuals
+        residuals = y_pred_eval - y_true_eval
+        fig_resid = px.histogram(pd.DataFrame({"Residual": residuals}), x="Residual", nbins=40, title="Residuals (Predicted - Actual)")
+        st.plotly_chart(fig_resid, use_container_width=True)
+
+        # Feature importance via Gradient Boosting on transformed features
+        try:
+            preprocess.fit(X)
+            X_tx = preprocess.transform(X)
+            feature_names = []
+            try:
+                feature_names = preprocess.get_feature_names_out().tolist()
+            except Exception:
+                feature_names = [f"f{i}" for i in range(X_tx.shape[1])]
+
+            gbr = GradientBoostingRegressor(random_state=42)
+            y_fit = np.log1p(y) if use_log else y.values
+            gbr.fit(X_tx, y_fit)
+            importances = getattr(gbr, "feature_importances_", None)
+            if importances is not None:
+                imp_df = pd.DataFrame({"feature": feature_names, "importance": importances}).sort_values("importance", ascending=False).head(20)
+                fig_imp = px.bar(imp_df, x="importance", y="feature", orientation="h", title="Top features (Gradient Boosting importance)")
+                st.plotly_chart(fig_imp, use_container_width=True)
+        except Exception as e:
+            st.warning(f"Could not compute feature importances: {e}")
+
+        # Links for deeper work
+        st.markdown("Notebook path: `ml_immo/notebooks/house_prices_modeling.ipynb`")
         st.markdown("Data: place Kaggle `train.csv` and `test.csv` under `ml_immo/data/house_prices/`.")
-        st.markdown("Metrics: RMSE, R² via 5‑fold CV.")
+        st.markdown("Metrics: RMSE, R² via 5‑fold cross‑validation.")
+
+        with st.expander("How to interpret the charts"):
+            st.markdown("- Predicted vs Actual: points close to the dashed line indicate good fit; systematic deviations suggest bias.\n- Residuals: centered, narrow distribution means low error; skew or heavy tails suggest missing interactions or outliers.\n- Feature importance: higher bars indicate stronger predictive power (in the transformed feature space). Use this to guide feature engineering.")
+
     render_ml_house_prices()
 elif page == "ML: Spam Classification":
     def render_ml_spam() -> None:
@@ -353,6 +513,8 @@ else:
         st.markdown("- Color‑blind friendly palettes and mobile layout")
         st.markdown("See: `data_storytelling/README.md`.")
     render_story_notes()
+
+ 
 
 
 # Sidebar footer with portfolio titles and contact
