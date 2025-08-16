@@ -325,8 +325,10 @@ page = st.sidebar.radio(
         "DL: Chatbot NLP",
         "Data for Good: AQI Forecast",
         "Data for Good: Local Climate 2050",
+        "Crypto: Global 3D Dashboard",
         "Storytelling: Pandemics Map",
         "Storytelling notes",
+        "Playground: Interactive",
         "Swiss Geo (STAC)",
     ],
     index=0,
@@ -1094,11 +1096,22 @@ elif page == "Storytelling notes":
     def render_story_notes() -> None:
         st.header("Data storytelling notes")
         st.caption("Reusable ideas to enrich narrative and UX across dashboards.")
-        st.markdown("- Annotations and callouts for key events")
-        st.markdown("- Glossary with short definitions")
-        st.markdown("- Source links and caveats near each chart")
-        st.markdown("- Color‑blind friendly palettes and mobile layout")
-        st.markdown("See: `data_storytelling/README.md`.")
+        # Render full notes from README if available
+        readme_path = Path("data_storytelling/README.md")
+        if readme_path.exists():
+            try:
+                st.markdown(readme_path.read_text(encoding="utf-8"))
+            except Exception:
+                st.info("Could not read README. Showing quick tips instead.")
+                st.markdown("- Annotations and callouts for key events")
+                st.markdown("- Glossary with short definitions")
+                st.markdown("- Source links and caveats near each chart")
+                st.markdown("- Color‑blind friendly palettes and mobile layout")
+        else:
+            st.markdown("- Annotations and callouts for key events")
+            st.markdown("- Glossary with short definitions")
+            st.markdown("- Source links and caveats near each chart")
+            st.markdown("- Color‑blind friendly palettes and mobile layout")
     render_story_notes()
 elif page == "Storytelling: Pandemics Map":
     def render_pandemics_map() -> None:
@@ -1298,6 +1311,86 @@ elif page == "Swiss Geo (STAC)":
                                 pass
 
     render_stac()
+elif page == "Playground: Interactive":
+    def render_playground() -> None:
+        st.header("Interactive storytelling playground")
+        st.caption("Build a quick narrative chart: pick a series, highlight a year, and add annotations.")
+
+        # Synthetic time series
+        years = list(range(2000, 2021))
+        series = {
+            "Series A": np.linspace(50, 120, len(years)) + np.sin(np.linspace(0, 6, len(years))) * 8,
+            "Series B": np.linspace(80, 60, len(years)) + np.cos(np.linspace(0, 8, len(years))) * 6,
+            "Series C": 70 + np.random.RandomState(42).normal(0, 3, len(years)).cumsum() / 4,
+        }
+        dfp = pd.DataFrame({"year": years, **series})
+
+        cols = st.multiselect("Series", list(series.keys()), default=["Series A", "Series B"])
+        highlight_year = st.slider("Highlight year", min_value=years[0], max_value=years[-1], value=2010)
+        show_markers = st.checkbox("Show markers", value=True)
+
+        fig = px.line(dfp, x="year", y=cols if cols else list(series.keys()), markers=show_markers)
+        fig.update_layout(title="Interactive narrative chart", legend_title="Series")
+        # Highlight band for selected year
+        fig.add_vrect(x0=highlight_year - 0.5, x1=highlight_year + 0.5, fillcolor="#F0E442", opacity=0.2, line_width=0)
+
+        # Annotation state
+        st.session_state.setdefault("pg_annotations", [])
+        with st.expander("Add annotation"):
+            ann_text = st.text_input("Text", value="Key event")
+            ann_year = st.number_input("Year", min_value=years[0], max_value=years[-1], value=highlight_year, step=1)
+            ann_y = st.number_input("Y (approx)", value=float(dfp[cols[0]].iloc[years.index(highlight_year)]) if cols else float(dfp["Series A"].iloc[years.index(highlight_year)]))
+            c1, c2 = st.columns(2)
+            with c1:
+                if st.button("Add"):
+                    st.session_state["pg_annotations"].append({"x": float(ann_year), "y": float(ann_y), "text": ann_text})
+            with c2:
+                if st.button("Reset annotations"):
+                    st.session_state["pg_annotations"] = []
+
+        for ann in st.session_state["pg_annotations"]:
+            fig.add_annotation(x=ann["x"], y=ann["y"], text=ann["text"], showarrow=True, arrowhead=2, ax=20, ay=-30)
+
+        st.plotly_chart(fig, use_container_width=True)
+
+        with st.expander("Tips"):
+            st.markdown("- Use the yellow band to highlight the focal year.\n- Keep 3–5 annotations max.\n- Use the Storytelling notes for best practices.")
+
+    render_playground()
+elif page == "Crypto: Global 3D Dashboard":
+    def render_crypto_3d() -> None:
+        st.header("Crypto Global Dashboard 3D")
+        st.caption("Immersive 3D crypto market dashboard (separate Streamlit app).")
+
+        readme_path = Path("crypto_global_dashboard_3d/README.md")
+        if readme_path.exists():
+            try:
+                st.markdown(readme_path.read_text(encoding="utf-8"))
+            except Exception:
+                st.info("See project README at `crypto_global_dashboard_3d/README.md`.")
+        else:
+            st.markdown("This project lives under `crypto_global_dashboard_3d/`. Run it locally:")
+            st.code(
+                """
+                .venv\\Scripts\\activate
+                python -m pip install -r crypto_global_dashboard_3d/requirements.txt
+                python -m streamlit run "crypto_global_dashboard_3d/streamlit_app.py"
+                """,
+                language="bash",
+            )
+
+        st.markdown("Quick start (copy/paste):")
+        st.code(
+            """
+            # in project root
+            .venv\\Scripts\\activate
+            python -m pip install -r crypto_global_dashboard_3d/requirements.txt
+            python -m streamlit run "crypto_global_dashboard_3d/streamlit_app.py"
+            """,
+            language="bash",
+        )
+
+    render_crypto_3d()
 
  
 
