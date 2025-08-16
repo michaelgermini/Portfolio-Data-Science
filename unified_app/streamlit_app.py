@@ -1105,17 +1105,85 @@ elif page == "Storytelling: Pandemics Map":
         st.header("Storytelling – Historical Pandemics Map")
         st.caption("Interactive Folium map showing spread by year; link to sources (WHO + historical archives).")
         st.markdown("Notebook path: `data_storytelling/pandemics_map/notebooks/pandemics_map.ipynb`")
-        st.markdown("Run locally:")
-        st.code(
-            """
-            # in project root
-            .venv\\Scripts\\activate  # if you use the venv
-            jupyter lab data_storytelling/pandemics_map/notebooks/pandemics_map.ipynb
-            """,
-            language="bash",
-        )
-        st.markdown("Data: CSV with `year, country, cases, deaths, disease`.")
-        st.info("A live Folium preview inside the app can be added later once the dataset is finalized.")
+
+        # Load static synthetic data by default
+        data_path = Path("data_storytelling/pandemics_map/data/pandemics_sample.csv")
+        if not data_path.exists():
+            st.error("Sample dataset is missing. Please regenerate or provide a CSV with columns: year, country, disease, cases, deaths.")
+            return
+        df = pd.read_csv(data_path)
+        df.columns = [c.lower() for c in df.columns]
+        required = {"year", "country", "disease", "cases", "deaths"}
+        if not required.issubset(set(df.columns)):
+            st.error("Dataset must include columns: year, country, disease, cases, deaths.")
+            return
+
+        # Minimal country -> (lat, lon) for the sample
+        country_coords = {
+            "italy": (41.8719, 12.5674),
+            "france": (46.2276, 2.2137),
+            "england": (52.3555, -1.1743),
+            "united kingdom": (55.3781, -3.4360),
+            "united states": (39.8283, -98.5795),
+            "india": (20.5937, 78.9629),
+            "guinea": (9.9456, -9.6966),
+            "liberia": (6.4281, -9.4295),
+            "sierra leone": (8.4606, -11.7799),
+        }
+
+        # Controls
+        years = sorted(df["year"].dropna().unique().tolist())
+        sel_year = st.selectbox("Year", years, index=0)
+        diseases = sorted(df["disease"].dropna().unique().tolist())
+        sel_diseases = st.multiselect("Disease(s)", diseases, default=diseases)
+        metric = st.radio("Metric", ["cases", "deaths"], index=0, horizontal=True)
+
+        sub = df[(df["year"] == sel_year) & (df["disease"].isin(sel_diseases))].copy()
+        if sub.empty:
+            st.info("No records for the current filters.")
+            return
+
+        # Build Folium map
+        try:
+            import folium  # type: ignore
+        except Exception:
+            st.error("Folium is not available. Please install dependencies.")
+            return
+
+        # Color per disease (simple palette)
+        palette = ["#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00", "#a65628", "#f781bf", "#999999"]
+        disease_to_color = {d: palette[i % len(palette)] for i, d in enumerate(diseases)}
+
+        # Center map on median of known coords
+        coords = [country_coords.get(str(c).lower()) for c in sub["country"]]
+        coords = [c for c in coords if c]
+        center = (20, 0) if not coords else (float(pd.Series([lat for lat, _ in coords]).median()), float(pd.Series([lon for _, lon in coords]).median()))
+        m = folium.Map(location=center, zoom_start=2, tiles="cartodbpositron")
+
+        for _, row in sub.iterrows():
+            name = str(row["country"]) if pd.notna(row["country"]) else ""
+            key = name.lower()
+            loc = country_coords.get(key)
+            if not loc:
+                continue
+            value = float(row[metric]) if pd.notna(row[metric]) else 0.0
+            radius = max(5.0, min(40.0, (value ** 0.5)))  # compress dynamic range
+            disease = str(row["disease"]) if pd.notna(row["disease"]) else ""
+            color = disease_to_color.get(disease, "#3186cc")
+            popup = folium.Popup(
+                html=f"<b>{name}</b><br/>Disease: {disease}<br/>Year: {sel_year}<br/>{metric.title()}: {int(value):,}",
+                max_width=250,
+            )
+            folium.CircleMarker(location=loc, radius=radius, color=color, fill=True, fill_opacity=0.6, popup=popup).add_to(m)
+
+        # Render map
+        from streamlit.components.v1 import html as st_html
+        st_html(m._repr_html_(), height=550)
+
+        with st.expander("Data (filtered)"):
+            st.dataframe(sub[["year", "country", "disease", metric]].sort_values(metric, ascending=False), use_container_width=True)
+
+        st.caption("Sources: WHO + historical archives (illustrative sample).")
     render_pandemics_map()
 
 elif page == "Swiss Geo (STAC)":
