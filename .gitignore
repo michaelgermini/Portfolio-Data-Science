@@ -1,0 +1,21 @@
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+.ipynb_checkpoints/
+
+.venv/
+venv/
+ENV/
+
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+.streamlit/secrets.toml
+
+# Keep sample CSVs but ignore large dumps by default (commented)
+# data/**/*.csv
+
